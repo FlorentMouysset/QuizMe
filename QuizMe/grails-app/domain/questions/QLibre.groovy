@@ -1,6 +1,6 @@
 package questions
 
-class QLibre {
+class QLibre extends Question {
 
     static constraints = {
     }

@@ -1,6 +1,6 @@
 package questions
 
-class QElaboration {
+class QElaboration extends Question {
 
     static constraints = {
     }
