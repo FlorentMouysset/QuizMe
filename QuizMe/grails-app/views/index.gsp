@@ -82,8 +82,8 @@ p {
 <body>
 
 	Identifiant : <g:textField name="myField" value="" /> <br/>
-	Mots de passe : <g:passwordField name="myPasswordField" value="" />
-	<g:submitButton name="create" class="save" value="indentification" />
+	Mot de passe : <g:passwordField name="myPasswordField" value="" />
+	<g:submitButton name="create" class="save" value="identification" />
 
 </body>
 </html>
