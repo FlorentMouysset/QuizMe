@@ -83,7 +83,11 @@ p {
 
 	Identifiant : <g:textField name="myField" value="" /> <br/>
 	Mot de passe : <g:passwordField name="myPasswordField" value="" />
-	<g:submitButton name="create" class="save" value="identification" />
+
+<g:form controller="AuthentificationController">
+    <g:actionSubmit value="identification"/>
+</g:form>
+
 
 </body>
 </html>

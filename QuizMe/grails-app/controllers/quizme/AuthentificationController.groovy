@@ -9,4 +9,8 @@ class AuthentificationController {
     def index() {
         redirect(action: "../index", params: params)
     }
+	
+	def identification(){
+		println "ici action identification"
+	}
 }

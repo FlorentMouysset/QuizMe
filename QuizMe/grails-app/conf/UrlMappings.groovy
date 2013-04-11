@@ -7,7 +7,17 @@ class UrlMappings {
 			}
 		}
 
+ 		println "ici urlmap" 
+		
+		"/AuthentificationController/identification" {
+			println "ici urlmap2"
+			controller = "AuthentificationController"
+			action = "index"
+		}
+		
 		"/"(view:"/index")
 		"500"(view:'/error')
+		
+		
 	}
 }
