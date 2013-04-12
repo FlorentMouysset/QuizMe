@@ -81,12 +81,16 @@ p {
 </head>
 <body>
 
-	Identifiant : <g:textField name="myField" value="" /> <br/>
-	Mot de passe : <g:passwordField name="myPasswordField" value="" />
+	<g:form controller="authentification" action="identification" >
+	
+	Identifiant :
+		<g:textField name="idField" value=""/> <br /> Mot de passe :
+		<g:passwordField name="textMdp" value="" /> <br/>
+		
+		<g:submitButton name="valBoutonIdentification" value="identification"  />
+	</g:form>
 
-<g:form controller="AuthentificationController">
-    <g:actionSubmit value="identification"/>
-</g:form>
+
 
 
 </body>
