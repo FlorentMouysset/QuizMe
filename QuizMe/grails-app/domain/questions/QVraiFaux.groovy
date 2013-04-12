@@ -1,6 +1,6 @@
 package questions
 
-class QVraiFaux {
+class QVraiFaux extends Question {
 
     static constraints = {
     }

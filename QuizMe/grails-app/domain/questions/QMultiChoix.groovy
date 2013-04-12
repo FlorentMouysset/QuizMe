@@ -1,6 +1,6 @@
 package questions
 
-class QMultiChoix {
+class QMultiChoix extends Question {
 
     static constraints = {
     }
