@@ -9,4 +9,11 @@ class Etudiant extends User {
 		//TODO Grosse erreur sur les contraintes : size : 8..8 peut etre?
 		//numEtudiant size: 8..8, blank: false, unique: true
     }
+
+
+	
+	/*String toString() {
+		"Etudiant [numEtudiant=" + numEtudiant + "]"
+	}*/	
+	
 }

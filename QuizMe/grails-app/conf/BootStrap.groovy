@@ -5,19 +5,38 @@ import user.UserId
 
 class BootStrap {
 
+
+
+		
     def init = { servletContext ->
-//		User adam = new Etudiant(nom:"Green",
-//			prenom:"Adam",
-//			sexe:"M",
-//			dateDeNaissance: new Date("11/11/1985"),
-//			email:"adam@green.net",
-//			//identifiants:new UserId(login:"adam", password:"adam"),
-//			numEtudiant:"20805012")
-//		
-//		if(!adam.save()) {
-//			adam.errors.allErrors.each{error ->
-//				println "An error occured with adam : "+error}
-//		}
+		
+		def idUser = new UserId(login:"adam1", password:"adammdp")
+		
+		//	idUser.save()
+			
+		if( !idUser.save() ) {
+			idUser.errors.allErrors.each{error ->
+					println "An error occured with id : "+error}
+		}
+		
+	//	def idUser2 = UserId.findByLogin("adam1")
+	//	if(idUser2==null){
+	//		println "pb"
+	//	}
+		
+		def adam = new Etudiant(nom:"Green",
+			prenom:"Adam",
+			sexe:"M",
+			dateDeNaissance: new Date("11/11/1985"),
+			email:"adam@green.net",
+			numEtudiant:"20805012"
+			,identifiants:idUser)
+		//adam.setUserId(idUser)
+		
+		if(!adam.save()) {
+			adam.errors.allErrors.each{error ->
+				println "An error occured with adam : "+error}
+		}
 			
 			
 //		User eve = new Etudiant(prenom:"Eve",

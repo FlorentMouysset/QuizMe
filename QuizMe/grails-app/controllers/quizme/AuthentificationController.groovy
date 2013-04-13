@@ -2,6 +2,8 @@ package quizme
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import user.User
+
 class AuthentificationController {
 
     static allowedMethods = [ index : "POST", save: "POST", update: "POST", delete: "POST"]
@@ -11,6 +13,9 @@ class AuthentificationController {
 		def idUser = params["idField"]
 		def mdpUser = params["textMdp"]
 		println idUser + " " + mdpUser
+		
+		println Authentification.identification()
+		
 		
 		if(false){//TODO verif idUser => ds bd -> mdp <--> User
 			
