@@ -7,7 +7,7 @@ class User {
 	String sexe
 	Date dateDeNaissance
 	String email
-	//UserId identifiants
+	UserId identifiants
 
     static constraints = {
 		prenom(blank:false)

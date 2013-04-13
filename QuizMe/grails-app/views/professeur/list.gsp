@@ -34,6 +34,8 @@
 					
 						<g:sortableColumn property="dateDeNaissance" title="${message(code: 'professeur.dateDeNaissance.label', default: 'Date De Naissance')}" />
 					
+						<th><g:message code="professeur.identifiants.label" default="Identifiants" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -49,6 +51,8 @@
 						<td>${fieldValue(bean: professeurInstance, field: "email")}</td>
 					
 						<td><g:formatDate date="${professeurInstance.dateDeNaissance}" /></td>
+					
+						<td>${fieldValue(bean: professeurInstance, field: "identifiants")}</td>
 					
 					</tr>
 				</g:each>

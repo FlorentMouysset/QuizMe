@@ -68,6 +68,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${professeurInstance?.identifiants}">
+				<li class="fieldcontain">
+					<span id="identifiants-label" class="property-label"><g:message code="professeur.identifiants.label" default="Identifiants" /></span>
+					
+						<span class="property-value" aria-labelledby="identifiants-label"><g:link controller="userId" action="show" id="${professeurInstance?.identifiants?.id}">${professeurInstance?.identifiants?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
