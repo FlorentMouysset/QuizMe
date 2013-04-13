@@ -42,6 +42,14 @@
 	<g:datePicker name="dateDeNaissance" precision="day"  value="${etudiantInstance?.dateDeNaissance}"  />
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: etudiantInstance, field: 'identifiants', 'error')} required">
+	<label for="identifiants">
+		<g:message code="etudiant.identifiants.label" default="Identifiants" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="identifiants" name="identifiants.id" from="${user.UserId.list()}" optionKey="id" required="" value="${etudiantInstance?.identifiants?.id}" class="many-to-one"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: etudiantInstance, field: 'numEtudiant', 'error')} ">
 	<label for="numEtudiant">
 		<g:message code="etudiant.numEtudiant.label" default="Num Etudiant" />

@@ -3,4 +3,5 @@
 *.settings
 *.class
 .metadata/
-*/stacktrace.log
+*stacktrace.log
+

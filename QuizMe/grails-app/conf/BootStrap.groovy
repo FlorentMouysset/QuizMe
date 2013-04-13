@@ -6,63 +6,60 @@ import user.UserId
 class BootStrap {
 
 
-
-		
-    def init = { servletContext ->
-		
-		def idUser = new UserId(login:"adam1", password:"adammdp")
-		
-		//	idUser.save()
+	def creatSaveUserId = {login, mdp->
+		def idUser = new UserId(login:login, password:mdp)
 			
 		if( !idUser.save() ) {
 			idUser.errors.allErrors.each{error ->
 					println "An error occured with id : "+error}
 		}
+		idUser
+	}
+	
+	
 		
-	//	def idUser2 = UserId.findByLogin("adam1")
-	//	if(idUser2==null){
-	//		println "pb"
-	//	}
+    def init = { servletContext ->
 		
+		def adamId = creatSaveUserId("adamId","adamMpd")
 		def adam = new Etudiant(nom:"Green",
 			prenom:"Adam",
 			sexe:"M",
 			dateDeNaissance: new Date("11/11/1985"),
 			email:"adam@green.net",
 			numEtudiant:"20805012"
-			,identifiants:idUser)
-		//adam.setUserId(idUser)
+			,identifiants:adamId)
 		
 		if(!adam.save()) {
 			adam.errors.allErrors.each{error ->
 				println "An error occured with adam : "+error}
 		}
 			
+		def eveId = creatSaveUserId("eveId","eveMpd")
+		User eve = new Etudiant(prenom:"Eve",
+			nom:"Green",
+			email:"eve@green.net",
+			sexe:"F",
+			dateDeNaissance: new Date("02/04/1986"),
+			numEtudiant:"20804023",
+			identifiants: eveId)
 			
-//		User eve = new Etudiant(prenom:"Eve",
-//			nom:"Green",
-//			email:"eve@green.net",
-//			sexe:"F",
-//			dateDeNaissance: new Date("02/04/1986"),
-//			numEtudiant:"20804023",
-//			identifiants: new UserId(login:"eveF", password:"eveF"))
-//			
-//		if(!eve.save()) {
-//			eve.errors.allErrors.each{error ->
-//				println "An error occured with eve : "+error}
-//		}
-//		
-//		User prof = new Professeur(prenom:"Prof",
-//			nom:"Prof",
-//			email:"prof@gmail.com",
-//			sexe:"M",
-//			dateDeNaissance: new Date("05/01/1958"),
-//			identifiants: new UserId(login:"prof", password:"prof"))
-//			
-//		if(!prof.save()) {
-//			prof.errors.allErrors.each{error ->
-//				println "An error occured with prof : "+error}
-//		}
+		if(!eve.save()) {
+			eve.errors.allErrors.each{error ->
+				println "An error occured with eve : "+error}
+		}
+		
+		def profId = creatSaveUserId("profId","profMdp")
+		User prof = new Professeur(prenom:"Prof",
+			nom:"Prof",
+			email:"prof@gmail.com",
+			sexe:"M",
+			dateDeNaissance: new Date("05/01/1958"),
+			identifiants: profId)
+			
+		if(!prof.save()) {
+			prof.errors.allErrors.each{error ->
+				println "An error occured with prof : "+error}
+		}
 		
     }
     def destroy = {

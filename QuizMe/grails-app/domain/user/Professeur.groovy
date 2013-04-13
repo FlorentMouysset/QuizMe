@@ -4,4 +4,5 @@ class Professeur extends User {
 
     static constraints = {
     }
+	
 }
