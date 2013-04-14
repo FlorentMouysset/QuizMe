@@ -20,7 +20,7 @@ class BootStrap {
 		
     def init = { servletContext ->
 		
-		def adamId = creatSaveUserId("adamId","adamMpd")
+		def adamId = creatSaveUserId("adamId","adamMdp")
 		def adam = new Etudiant(nom:"Green",
 			prenom:"Adam",
 			sexe:"M",

@@ -14,12 +14,14 @@ class AuthentificationController {
 		def mdpUser = params["textMdp"]
 		println idUser + " " + mdpUser
 		
-		println Authentification.identification()
+		def find = Authentification.identification(idUser, mdpUser)
 		
 		
-		if(false){//TODO verif idUser => ds bd -> mdp <--> User
-			
+		if(find){
+			println "authen reussie"
+			redirect(controller: "room", action: "index", params: params)
 		}else{
+			println "authen fail"
 			redirect(action: "errorIdent", params: params)
 		}
 	}
