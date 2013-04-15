@@ -1,11 +1,7 @@
 package quizme
 
-import java.nio.file.attribute.UserDefinedFileAttributeView;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Import;
-
-import user.User
 import user.Etudiant
+import user.User
 import user.UserId
 
 

@@ -1,14 +1,14 @@
 
-<%@ page import="quizme.Room" %>
+<%@ page import="quizme.Session" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'room.label', default: 'Room')}" />
+		<g:set var="entityName" value="${message(code: 'session.label', default: 'Session')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#show-room" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#show-session" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -16,18 +16,18 @@
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
-		<div id="show-room" class="content scaffold-show" role="main">
+		<div id="show-session" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list room">
+			<ol class="property-list session">
 			
-				<g:if test="${roomInstance?.admin}">
+				<g:if test="${sessionInstance?.nom}">
 				<li class="fieldcontain">
-					<span id="admin-label" class="property-label"><g:message code="room.admin.label" default="Admin" /></span>
+					<span id="nom-label" class="property-label"><g:message code="session.nom.label" default="Nom" /></span>
 					
-						<span class="property-value" aria-labelledby="admin-label"><g:link controller="professeur" action="show" id="${roomInstance?.admin?.id}">${roomInstance?.admin?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="nom-label"><g:fieldValue bean="${sessionInstance}" field="nom"/></span>
 					
 				</li>
 				</g:if>
@@ -35,8 +35,8 @@
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${roomInstance?.id}" />
-					<g:link class="edit" action="edit" id="${roomInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:hiddenField name="id" value="${sessionInstance?.id}" />
+					<g:link class="edit" action="edit" id="${sessionInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

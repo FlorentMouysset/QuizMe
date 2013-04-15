@@ -1,9 +1,12 @@
 package quizme
 
-class Room {
+import user.Professeur
 
-	//Session sessions
-	//static hasOne = [admin: Professeur]
+class Room {
+	
+	String nom
+	Professeur admin
+	static hasMany = [sessions:Session]
 
 	
     static constraints = {

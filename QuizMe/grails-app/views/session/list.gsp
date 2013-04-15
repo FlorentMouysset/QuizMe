@@ -1,21 +1,21 @@
 
-<%@ page import="quizme.Room" %>
+<%@ page import="quizme.Session" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'room.label', default: 'Room')}" />
+		<g:set var="entityName" value="${message(code: 'session.label', default: 'Session')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#list-room" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<a href="#list-session" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
-		<div id="list-room" class="content scaffold-list" role="main">
+		<div id="list-session" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
@@ -24,22 +24,22 @@
 				<thead>
 					<tr>
 					
-						<th><g:message code="room.admin.label" default="Admin" /></th>
+						<g:sortableColumn property="nom" title="${message(code: 'session.nom.label', default: 'Nom')}" />
 					
 					</tr>
 				</thead>
 				<tbody>
-				<g:each in="${roomInstanceList}" status="i" var="roomInstance">
+				<g:each in="${sessionInstanceList}" status="i" var="sessionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${roomInstance.id}">${fieldValue(bean: roomInstance, field: "admin")}</g:link></td>
+						<td><g:link action="show" id="${sessionInstance.id}">${fieldValue(bean: sessionInstance, field: "nom")}</g:link></td>
 					
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
 			<div class="pagination">
-				<g:paginate total="${roomInstanceTotal}" />
+				<g:paginate total="${sessionInstanceTotal}" />
 			</div>
 		</div>
 	</body>
