@@ -2,11 +2,21 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: roomInstance, field: 'admin', 'error')} required">
-	<label for="admin">
-		<g:message code="room.admin.label" default="Admin" />
-		<span class="required-indicator">*</span>
+
+<div class="fieldcontain ${hasErrors(bean: roomInstance, field: 'mdp', 'error')} ">
+	<label for="mdp">
+		<g:message code="room.mdp.label" default="Mdp" />
+		
 	</label>
-	<g:select id="admin" name="admin.id" from="${user.Professeur.list()}" optionKey="id" required="" value="${roomInstance?.admin?.id}" class="many-to-one"/>
+	<g:textField name="mdp" value="${roomInstance?.mdp}"/>
 </div>
+
+<div class="fieldcontain ${hasErrors(bean: roomInstance, field: 'nom', 'error')} ">
+	<label for="nom">
+		<g:message code="room.nom.label" default="Nom" />
+		
+	</label>
+	<g:textField name="nom" value="${roomInstance?.nom}"/>
+</div>
+
 
