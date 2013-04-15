@@ -4,6 +4,7 @@ class UserId {
 	
 	String login
 	String password
+	static belongsTo = [user:User]
 
     static constraints = {
 		login size: 4..15, blank: false, unique: true
