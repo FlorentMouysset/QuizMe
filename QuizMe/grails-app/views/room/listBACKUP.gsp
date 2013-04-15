@@ -29,6 +29,10 @@
 				<thead>
 					<tr>
 					
+						<th><g:message code="room.admin.label" default="Admin" /></th>
+					
+						<g:sortableColumn property="mdp" title="${message(code: 'room.mdp.label', default: 'Mdp')}" />
+					
 						<g:sortableColumn property="nom" title="${message(code: 'room.nom.label', default: 'Nom')}" />
 					
 					</tr>
@@ -37,6 +41,9 @@
 				<g:each in="${roomInstanceList}" status="i" var="roomInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
+						<td><g:link action="show" id="${roomInstance.id}">${fieldValue(bean: roomInstance, field: "admin")}</g:link></td>
+					
+						<td>${fieldValue(bean: roomInstance, field: "mdp")}</td>
 					
 						<td>${fieldValue(bean: roomInstance, field: "nom")}</td>
 					

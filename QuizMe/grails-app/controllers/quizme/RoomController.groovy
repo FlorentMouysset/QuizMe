@@ -39,6 +39,12 @@ class RoomController {
     }
 
     def save() {
+		println "save room " + params["id"]
+		params["admin.id"] = params["id"]
+        params["admin"]=["id":params["id"]]
+		params.each{
+				println "##" + it
+		}
         def roomInstance = new Room(params)
         if (!roomInstance.save(flush: true)) {
             render(view: "create", model: [roomInstance: roomInstance])

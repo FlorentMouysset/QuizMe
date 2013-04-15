@@ -25,7 +25,7 @@ class BootStrap {
 			prenom:"Adam",
 			sexe:"M",
 			dateDeNaissance: new Date("11/11/1985"),
-			email:"adam@green.net",
+			email:"adam@gmail.com",
 			numEtudiant:"20805012"
 			,identifiants:adamId)
 		
@@ -37,7 +37,7 @@ class BootStrap {
 		def eveId = creatSaveUserId("eveId","eveMpd")
 		User eve = new Etudiant(prenom:"Eve",
 			nom:"Green",
-			email:"eve@green.net",
+			email:"eve@gmail.com",
 			sexe:"F",
 			dateDeNaissance: new Date("02/04/1986"),
 			numEtudiant:"20804023",

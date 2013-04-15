@@ -32,6 +32,35 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${roomInstance?.mdp}">
+				<li class="fieldcontain">
+					<span id="mdp-label" class="property-label"><g:message code="room.mdp.label" default="Mdp" /></span>
+					
+						<span class="property-value" aria-labelledby="mdp-label"><g:fieldValue bean="${roomInstance}" field="mdp"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${roomInstance?.nom}">
+				<li class="fieldcontain">
+					<span id="nom-label" class="property-label"><g:message code="room.nom.label" default="Nom" /></span>
+					
+						<span class="property-value" aria-labelledby="nom-label"><g:fieldValue bean="${roomInstance}" field="nom"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${roomInstance?.sessions}">
+				<li class="fieldcontain">
+					<span id="sessions-label" class="property-label"><g:message code="room.sessions.label" default="Sessions" /></span>
+					
+						<g:each in="${roomInstance.sessions}" var="s">
+						<span class="property-value" aria-labelledby="sessions-label"><g:link controller="session" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

@@ -33,7 +33,7 @@ class Authentification {
 		def profId = creatSaveUserId("prof","prof")
 		User prof = new Professeur(prenom:"Prof",
 			nom:"Prof",
-			email:"prof@gmail.com",
+			email:"prof@green.com",
 			sexe:"M",
 			dateDeNaissance: new Date("05/01/1958"),
 			identifiants: profId)
