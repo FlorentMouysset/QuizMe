@@ -47,7 +47,7 @@ class Authentification {
 	}
 	
 	static def identification(String login , String mdp){
-		clo()
+		clo()		
 		
 		println "authen domain nb users :" + User.count
 		def list = User.all
@@ -60,7 +60,7 @@ class Authentification {
 			def user = it.next()
 			//println "##" + user.getIdentifiants().getLogin()  + " " + login + " " + user.getIdentifiants().getPassword() +" "+  mdp
 			if (user.getIdentifiants().getLogin() == login &&  user.getIdentifiants().getPassword() == mdp){
-				//println "find !"
+				println "find !"
 				find = user
 			} 
 		}

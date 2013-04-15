@@ -2,6 +2,8 @@ package quizme
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import user.Etudiant
+
 class RoomController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -11,24 +13,29 @@ class RoomController {
     }
 
     def list(Integer max) {
-		println "list room"
-        params.max = Math.min(max ?: 10, 100)
-		params.each{
-			println "##" + it
+		println "list room " + params["userid"] + " " + params["id"] 
+		def userid // l'user id peut provenir de 2 manière pas userid ou id
+		if(params["userid"] != null){
+			userid = params["userid"]
+		}else{
+			userid = params["id"]
 		}
-		println "!" + params["user"]
-		println ">" + params["user"].class
-//		println "!" + params["user"].getId()
+        params.max = Math.min(max ?: 10, 100)
+		/*params.each{
+			println "##" + it
+		}*/
 		
-        [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count(), user:params["user"], userContextIsEtudiant : params["userContext"]]
+		def user = session.getAttribute(userid)
+		def contextUserType = user.class.equals( Etudiant.class )
+        [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count(), userContextIsEtudiant : contextUserType, userid : userid ]
     }
 
     def create() {
-		println "create room"
-		params.each{
+		println "create room " + params["id"]
+	/*	params.each{
 			println "##" + it
-		}
-        [roomInstance: new Room(params)]
+		}*/
+        [roomInstance: new Room(params), userid : params["id"] ]
     }
 
     def save() {
