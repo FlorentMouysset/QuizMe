@@ -8,8 +8,9 @@
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		erreur d'identification !!
-		
+		Connection impossible ! <br/>
+		Cause :<br/>
+		${params["cause"]}		
 		<br/>
 		<a class="home" href="${createLink(uri: '/')}">essayer à nouveau</a>
 		

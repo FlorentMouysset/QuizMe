@@ -1,9 +1,5 @@
 
 <%@ page import="quizme.Room" %>
-<%@ page import="user.Etudiant" %>
-<%@ page import="user.User" %>
-<%@ page import="user.Professeur" %>
-<%@ page import="user.UserId" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,13 +9,15 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		${user}
+		Bonjour ${userid} choisissez une room
 		<a href="#list-room" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<g:if test="${userContextIsEtudiant=="false"}">
-					<li><g:link class="create" action="create" id="${user.id()}"  ><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/> [ne pas laisser] </a></li>
+				<li><g:link controller="authentification" class="home" action="logout" id="${userid}" >Logout</g:link></li>
+				
+				<g:if test="${userContextIsEtudiant==false}">
+					<li><g:link class="create" action="create" id="${userid}"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 				</g:if>
 			</ul>
 		</div>
