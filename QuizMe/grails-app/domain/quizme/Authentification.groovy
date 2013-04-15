@@ -1,11 +1,8 @@
 package quizme
 
-import java.nio.file.attribute.UserDefinedFileAttributeView;
-
-import com.sun.org.apache.xalan.internal.xsltc.compiler.Import;
-
-import user.User
 import user.Etudiant
+import user.Professeur
+import user.User
 import user.UserId
 
 
@@ -25,31 +22,46 @@ class Authentification {
 	}
 
 	static clo(){
-		def adamId = creatSaveUserId("adamId","adamMdp")
+		def adamId = creatSaveUserId("azer","azer")
 		def adam = new Etudiant(nom:"Green",prenom:"Adam",	sexe:"M",	dateDeNaissance: new Date("11/11/1985"),email:"adam@green.net",	numEtudiant:"20805012",identifiants:adamId)
 
 		if(!adam.save()) {
 			adam.errors.allErrors.each{error ->
 				println "An error occured with adam : "+error}
 		}
+		
+		def profId = creatSaveUserId("prof","prof")
+		User prof = new Professeur(prenom:"Prof",
+			nom:"Prof",
+			email:"prof@gmail.com",
+			sexe:"M",
+			dateDeNaissance: new Date("05/01/1958"),
+			identifiants: profId)
+			
+		if(!prof.save()) {
+			prof.errors.allErrors.each{error ->
+				println "An error occured with prof : "+error}
+		}
+
+		
 	}
 	
-	static boolean identification(String login , String mdp){
+	static def identification(String login , String mdp){
 		clo()
 		
 		println "authen domain nb users :" + User.count
 		def list = User.all
-		println User.all
-		boolean find = false
+		//println User.all
+		def find = null
 		
 		def it = list.iterator()
-		println "#" +it.hasNext() 
-		while(it.hasNext() && !find ){
+		//println "#" +it.hasNext() 
+		while(it.hasNext() && find==null ){
 			def user = it.next()
-			println "##" + user.getIdentifiants().getLogin()  + " " + login + " " + user.getIdentifiants().getPassword() +" "+  mdp
+			//println "##" + user.getIdentifiants().getLogin()  + " " + login + " " + user.getIdentifiants().getPassword() +" "+  mdp
 			if (user.getIdentifiants().getLogin() == login &&  user.getIdentifiants().getPassword() == mdp){
-				println "find !"
-				find = true
+				//println "find !"
+				find = user
 			} 
 		}
 		find

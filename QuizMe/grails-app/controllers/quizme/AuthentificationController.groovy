@@ -2,6 +2,7 @@ package quizme
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import user.Etudiant;
 import user.User
 
 class AuthentificationController {
@@ -9,16 +10,20 @@ class AuthentificationController {
     static allowedMethods = [ index : "POST", save: "POST", update: "POST", delete: "POST"]
 
 	def identification(){
-		println "ici action identification"
 		def idUser = params["idField"]
 		def mdpUser = params["textMdp"]
-		println idUser + " " + mdpUser
 		
-		def find = Authentification.identification(idUser, mdpUser)
+		def user = Authentification.identification(idUser, mdpUser)
 		
-		
-		if(find){
+		if(user != null){
 			println "authen reussie"
+		//	println ">>"+ user.getNumEtudiant()
+			//println ">>" + user.getClass().equals(Etudiant.getClass())
+			println ">" + user.class.equals( Etudiant.class)
+
+			println ">-" + user.getId()
+			params["user"] = user
+			params["userContext"] = user.class.equals( Etudiant.class )
 			redirect(controller: "room", action: "index", params: params)
 		}else{
 			println "authen fail"
@@ -27,8 +32,8 @@ class AuthentificationController {
 	}
 	
     def index() {
-		println "ici index authen controller"
-		println( params)
+//		println "ici index authen controller"
+//		println( params)
         redirect(action: "list", params: params)
     }
 	

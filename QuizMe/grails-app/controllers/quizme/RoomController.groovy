@@ -11,11 +11,23 @@ class RoomController {
     }
 
     def list(Integer max) {
+		println "list room"
         params.max = Math.min(max ?: 10, 100)
-        [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count()]
+		params.each{
+			println "##" + it
+		}
+		println "!" + params["user"]
+		println ">" + params["user"].class
+//		println "!" + params["user"].getId()
+		
+        [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count(), user:params["user"], userContextIsEtudiant : params["userContext"]]
     }
 
     def create() {
+		println "create room"
+		params.each{
+			println "##" + it
+		}
         [roomInstance: new Room(params)]
     }
 
