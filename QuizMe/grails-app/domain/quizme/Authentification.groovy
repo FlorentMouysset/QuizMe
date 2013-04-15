@@ -1,7 +1,6 @@
 package quizme
 
 import user.Etudiant
-import user.Professeur
 import user.User
 import user.UserId
 

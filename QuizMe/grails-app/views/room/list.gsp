@@ -32,11 +32,15 @@
 				<thead>
 					<tr>
 					
+						<th><g:message code="room.admin.label" default="Admin" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${roomInstanceList}" status="i" var="roomInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					
+						<td><g:link action="show" id="${roomInstance.id}">${fieldValue(bean: roomInstance, field: "admin")}</g:link></td>
 					
 					</tr>
 				</g:each>
