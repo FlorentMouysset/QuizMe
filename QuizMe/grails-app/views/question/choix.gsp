@@ -25,16 +25,16 @@
 		</div>
 		<table>
 			<tr>
-				<td><g:link controller="QMultiChoix" action="index">${QMultiChoix}</g:link></td>
+				<td><g:link controller="QMultiChoix" action="create">${QMultiChoix}</g:link></td>
 			</tr>
 			<tr>
-				<td><g:link controller="QVraiFaux" action="index">${QvraiFaux}</g:link></td>
+				<td><g:link controller="QVraiFaux" action="create">${QvraiFaux}</g:link></td>
 			</tr>
 			<tr>
-				<td><g:link controller="QElaboration" action="index">${QElaboration}</g:link></td>
+				<td><g:link controller="QElaboration" action="create">${QElaboration}</g:link></td>
 			</tr>
 			<tr>
-				<td><g:link controller="QLibre" action="index">${QLibre}</g:link></td>
+				<td><g:link controller="QLibre" action="create">${QLibre}</g:link></td>
 			</tr>
 
 		</table>
