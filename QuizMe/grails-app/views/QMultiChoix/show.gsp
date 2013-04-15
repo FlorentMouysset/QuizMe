@@ -32,6 +32,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${QMultiChoixInstance?.professeur}">
+				<li class="fieldcontain">
+					<span id="professeur-label" class="property-label"><g:message code="QMultiChoix.professeur.label" default="Professeur" /></span>
+					
+						<span class="property-value" aria-labelledby="professeur-label"><g:link controller="professeur" action="show" id="${QMultiChoixInstance?.professeur?.id}">${QMultiChoixInstance?.professeur?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${QMultiChoixInstance?.reponses}">
 				<li class="fieldcontain">
 					<span id="reponses-label" class="property-label"><g:message code="QMultiChoix.reponses.label" default="Reponses" /></span>

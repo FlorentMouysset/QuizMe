@@ -16,7 +16,8 @@ class QuestionController {
     }
 
     def create() {
-        [questionInstance: new Question(params)]
+        //[questionInstance: new Question(params)]
+		redirect(action: "choix", params: params)
     }
 
     def save() {
@@ -99,4 +100,9 @@ class QuestionController {
             redirect(action: "show", id: id)
         }
     }
+	
+	//TODO verifier
+	def choix() {
+//		redirect(controller: , action: "index", params: params)
+	}
 }

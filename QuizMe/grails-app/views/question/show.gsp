@@ -32,6 +32,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${questionInstance?.professeur}">
+				<li class="fieldcontain">
+					<span id="professeur-label" class="property-label"><g:message code="question.professeur.label" default="Professeur" /></span>
+					
+						<span class="property-value" aria-labelledby="professeur-label"><g:link controller="professeur" action="show" id="${questionInstance?.professeur?.id}">${questionInstance?.professeur?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${questionInstance?.statut}">
 				<li class="fieldcontain">
 					<span id="statut-label" class="property-label"><g:message code="question.statut.label" default="Statut" /></span>

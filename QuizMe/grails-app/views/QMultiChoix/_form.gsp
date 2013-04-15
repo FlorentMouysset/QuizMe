@@ -10,6 +10,14 @@
 	<g:textField name="enonce" required="" value="${QMultiChoixInstance?.enonce}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'professeur', 'error')} required">
+	<label for="professeur">
+		<g:message code="QMultiChoix.professeur.label" default="Professeur" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="professeur" name="professeur.id" from="${user.Professeur.list()}" optionKey="id" required="" value="${QMultiChoixInstance?.professeur?.id}" class="many-to-one"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'reponses', 'error')} ">
 	<label for="reponses">
 		<g:message code="QMultiChoix.reponses.label" default="Reponses" />

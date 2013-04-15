@@ -10,6 +10,14 @@
 	<g:textField name="enonce" required="" value="${questionInstance?.enonce}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'professeur', 'error')} required">
+	<label for="professeur">
+		<g:message code="question.professeur.label" default="Professeur" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="professeur" name="professeur.id" from="${user.Professeur.list()}" optionKey="id" required="" value="${questionInstance?.professeur?.id}" class="many-to-one"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'statut', 'error')} required">
 	<label for="statut">
 		<g:message code="question.statut.label" default="Statut" />

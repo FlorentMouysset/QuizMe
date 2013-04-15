@@ -26,6 +26,8 @@
 					
 						<g:sortableColumn property="enonce" title="${message(code: 'QMultiChoix.enonce.label', default: 'Enonce')}" />
 					
+						<th><g:message code="QMultiChoix.professeur.label" default="Professeur" /></th>
+					
 						<g:sortableColumn property="statut" title="${message(code: 'QMultiChoix.statut.label', default: 'Statut')}" />
 					
 					</tr>
@@ -35,6 +37,8 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${QMultiChoixInstance.id}">${fieldValue(bean: QMultiChoixInstance, field: "enonce")}</g:link></td>
+					
+						<td>${fieldValue(bean: QMultiChoixInstance, field: "professeur")}</td>
 					
 						<td>${fieldValue(bean: QMultiChoixInstance, field: "statut")}</td>
 					
