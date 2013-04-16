@@ -101,7 +101,6 @@ class QuestionController {
         }
     }
 	
-	//TODO verifier
 	def choix() {
 //		redirect(controller: , action: "index", params: params)
 	}

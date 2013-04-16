@@ -23,6 +23,7 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 		</div>
+		<!– TODO : Moche, ne respecte pas MVC –!>
 		<table>
 			<tr>
 				<td><g:link controller="QMultiChoix" action="create">${QMultiChoix}</g:link></td>
