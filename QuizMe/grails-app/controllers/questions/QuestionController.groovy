@@ -83,6 +83,7 @@ class QuestionController {
     }
 
     def delete(Long id) {
+		println "delete Question here"
         def questionInstance = Question.get(id)
         if (!questionInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), id])

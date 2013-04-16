@@ -1,5 +1,6 @@
 package questions
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.dao.DataIntegrityViolationException
 
 class QMultiChoixController {
@@ -82,21 +83,43 @@ class QMultiChoixController {
     }
 
     def delete(Long id) {
+		println "delete here"
         def QMultiChoixInstance = QMultiChoix.get(id)
         if (!QMultiChoixInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
             redirect(action: "list")
             return
         }
+		println "ca passe!"
 
         try {
+			
+//			QMultiChoixInstance.reponses.each{
+//				it.delete(flush : true)
+//			}
             QMultiChoixInstance.delete(flush: true)
+			println "test"
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
+			println "Erreur detectee"
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
             redirect(action: "show", id: id)
         }
     }
+	
+	//save la question + rediriger vers add reponse
+	def save2() {
+		def QMultiChoixInstance = new QMultiChoix(params)
+		if (!QMultiChoixInstance.save(flush: true)) {
+			render(view: "create", model: [QMultiChoixInstance: QMultiChoixInstance])
+			return
+		}
+
+		flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
+		params.clear()
+		params["idQuestion"] = QMultiChoixInstance.id
+		redirect(controller: "reponse", action: "create", params: params)
+	}
 }

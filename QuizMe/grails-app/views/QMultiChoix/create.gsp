@@ -14,11 +14,14 @@
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
+		
 		<div id="create-QMultiChoix" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			
 			<g:hasErrors bean="${QMultiChoixInstance}">
 			<ul class="errors" role="alert">
 				<g:eachError bean="${QMultiChoixInstance}" var="error">
@@ -26,12 +29,14 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form action="save" >
+			
+			<g:form method="post" controller="QMultiChoix">
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<g:actionSubmit  name="create" class="save" action="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<g:actionSubmit name="addReponse" class="save" action="save2" value="${message(code: 'Add Reponse')}" />
 				</fieldset>
 			</g:form>
 		</div>

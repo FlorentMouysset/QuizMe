@@ -26,8 +26,6 @@
 					
 						<g:sortableColumn property="enonce" title="${message(code: 'question.enonce.label', default: 'Enonce')}" />
 					
-						<th><g:message code="question.professeur.label" default="Professeur" /></th>
-					
 						<g:sortableColumn property="statut" title="${message(code: 'question.statut.label', default: 'Statut')}" />
 					
 					</tr>
@@ -37,8 +35,6 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
 						<td><g:link action="show" id="${questionInstance.id}">${fieldValue(bean: questionInstance, field: "enonce")}</g:link></td>
-					
-						<td>${fieldValue(bean: questionInstance, field: "professeur")}</td>
 					
 						<td>${fieldValue(bean: questionInstance, field: "statut")}</td>
 					

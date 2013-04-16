@@ -10,18 +10,9 @@
 	<g:textField name="enonce" required="" value="${QMultiChoixInstance?.enonce}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'professeur', 'error')} required">
-	<label for="professeur">
-		<g:message code="QMultiChoix.professeur.label" default="Professeur" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="professeur" name="professeur.id" from="${user.Professeur.list()}" optionKey="id" required="" value="${QMultiChoixInstance?.professeur?.id}" class="many-to-one"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'reponses', 'error')} ">
 	<label for="reponses">
 		<g:message code="QMultiChoix.reponses.label" default="Reponses" />
-		
 	</label>
 	
 <ul class="one-to-many">
@@ -32,7 +23,7 @@
 <g:link controller="reponse" action="create" params="['QMultiChoix.id': QMultiChoixInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>
 </li>
 </ul>
-
+<p> TODO : Bouton add reponse en bas qui save + ajoute reponse : enlever ce champ</p>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'statut', 'error')} required">
@@ -41,5 +32,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select name="statut" from="${questions.QStatut?.values()}" keys="${questions.QStatut.values()*.name()}" required="" value="${QMultiChoixInstance?.statut?.name()}"/>
+	<p> TODO : Statut cree par defaut : enlever ce champ</p>
 </div>
 
