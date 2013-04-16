@@ -21,6 +21,7 @@
 </g:each>
 <li class="add">
 <g:link controller="reponse" action="create" params="['QMultiChoix.id': QMultiChoixInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>
+<%--<g:link controller="QMultiChoix" action="save2" params="['QMultiChoix.id': QMultiChoixInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>--%>
 </li>
 </ul>
 <p> TODO : Bouton add reponse en bas qui save + ajoute reponse : enlever ce champ</p>
