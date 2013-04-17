@@ -13,7 +13,6 @@
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'reponses', 'error')} ">
 	<label for="reponses">
 		<g:message code="QMultiChoix.reponses.label" default="Reponses" />
-		
 	</label>
 	
 <ul class="one-to-many">
@@ -22,9 +21,10 @@
 </g:each>
 <li class="add">
 <g:link controller="reponse" action="create" params="['QMultiChoix.id': QMultiChoixInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>
+<%--<g:link controller="QMultiChoix" action="save2" params="['QMultiChoix.id': QMultiChoixInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>--%>
 </li>
 </ul>
-
+<p> TODO : Bouton add reponse en bas qui save + ajoute reponse : enlever ce champ</p>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'statut', 'error')} required">
@@ -33,5 +33,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select name="statut" from="${questions.QStatut?.values()}" keys="${questions.QStatut.values()*.name()}" required="" value="${QMultiChoixInstance?.statut?.name()}"/>
+	<p> TODO : Statut cree par defaut : enlever ce champ</p>
 </div>
 

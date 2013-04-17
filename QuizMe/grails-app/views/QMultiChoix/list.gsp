@@ -25,7 +25,7 @@
 					<tr>
 					
 						<g:sortableColumn property="enonce" title="${message(code: 'QMultiChoix.enonce.label', default: 'Enonce')}" />
-					
+										
 						<g:sortableColumn property="statut" title="${message(code: 'QMultiChoix.statut.label', default: 'Statut')}" />
 					
 					</tr>

@@ -16,18 +16,30 @@ class ReponseController {
     }
 
     def create() {
-        [reponseInstance: new Reponse(params)]
+		println "params : "+params
+		if(params["QMultiChoix.id"]!=null){
+			params["idQuestion"] = params["QMultiChoix.id"]
+		}
+		println "idQuestion : "+params["idQuestion"]
+        [reponseInstance: new Reponse(params), idQuestion : params["idQuestion"] ]
     }
 
     def save() {
-        def reponseInstance = new Reponse(params)
+		println "saveReponse , params : "+params
+		params["question.id"] = params['id']
+		params["question"] = ["id":params["id"]]
+		def reponseInstance = new Reponse(params)
+		println "ici"
         if (!reponseInstance.save(flush: true)) {
             render(view: "create", model: [reponseInstance: reponseInstance])
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'reponse.label', default: 'Reponse'), reponseInstance.id])
-        redirect(action: "show", id: reponseInstance.id)
+        //println reponseInstance.question.getClass().name
+		def cont = reponseInstance.question.getClass().name.toString().replaceAll("questions.", "")
+		//println "cont : "+cont
+		redirect(controller: cont, action: "edit", id: params["question.id"])
     }
 
     def show(Long id) {
@@ -99,4 +111,5 @@ class ReponseController {
             redirect(action: "show", id: id)
         }
     }
+	
 }

@@ -10,5 +10,7 @@ class Room {
 	static hasMany = [sessions:Session]
 	
     static constraints = {
+		nom(blank:false)
+		mdp(size: 2..15, blank: false)
     }
 }

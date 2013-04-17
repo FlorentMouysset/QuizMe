@@ -16,7 +16,8 @@ class QuestionController {
     }
 
     def create() {
-        [questionInstance: new Question(params)]
+        //[questionInstance: new Question(params)]
+		redirect(action: "choix", params: params)
     }
 
     def save() {
@@ -82,6 +83,7 @@ class QuestionController {
     }
 
     def delete(Long id) {
+		println "delete Question here"
         def questionInstance = Question.get(id)
         if (!questionInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), id])
@@ -99,4 +101,8 @@ class QuestionController {
             redirect(action: "show", id: id)
         }
     }
+	
+	def choix() {
+//		redirect(controller: , action: "index", params: params)
+	}
 }
