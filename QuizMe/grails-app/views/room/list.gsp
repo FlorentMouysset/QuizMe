@@ -8,15 +8,16 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		Bonjour ${userid} choisissez une room
-		<a href="#list-room" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		Bonjour ${username} choisissez une room
+		<g:if test="${userContextIsEtudiant==false}">
+			<br/>Ou créé une nouvelle room		
+		</g:if>
+						<a href="#list-room" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/> [ne pas laisser] </a></li>
-				<li><g:link controller="authentification" class="home" action="logout" id="${userid}" >Logout</g:link></li>
-				
+				<li><g:link controller="authentification" class="home" action="logout">Logout</g:link></li>
 				<g:if test="${userContextIsEtudiant==false}">
-					<li><g:link class="create" action="create" id="${userid}"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+					<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 				</g:if>
 			</ul>
 		</div>

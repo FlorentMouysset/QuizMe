@@ -14,60 +14,25 @@ class RoomController {
     }
 
     def list(Integer max) {
-		println "list room " + params["userid"] + " " + params["id"]
-		
-		def myse = request.getSession()
-		
-		println myse.id
-		println myse.getAt("test")
-		println "CK-Room " +  request.getCookie('userid')
-		
-		//println "REQ : " + request
-		//println "HEAD : " + request.getHeader("User-Agent")
-		//println "CP : " + request.getContextPath()
-		//println "SS : " + request.getSession(true) 
-		//println "HN : " + request.getHeaderNames();
-		
-		println session.getAt("test")
-	/*	println "-" + request.getSession().getAttribute("test")
-		println "=" + request.getRequestedSessionId()
-		println "+" + servletContext.getAttribute("test2")
-		println "*" + request['user']
-		request['user'] = params["userid"]
-		println "**" + request['user']
-		assert params["userid"] == request.user
-		*/
-		def userid // l'user id peut provenir de 2 manière pas userid ou id
-		if(params["userid"] != null){
-			userid = params["userid"]
-		}else{
-			userid = params["id"]
-		}
+		println "list room user : " + session["user"].getId()
         params.max = Math.min(max ?: 10, 100)
-		/*params.each{
-			println "##" + it
-		}*/
-		
-		def user = session.getAttribute(userid)
+
+		def user = session.getAttribute("user") //récupération de l'utilisateur
+		def userid = user.getId()
+		def username = user.getNom()
 		def contextUserType = user.class.equals( Etudiant.class )
-        [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count(), userContextIsEtudiant : contextUserType, userid : userid ]
+        [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count(), userContextIsEtudiant : contextUserType, username : username ]
     }
 
     def create() {
-		println "create room " + params["id"]
-		println request.getSession().getAttribute("test")
-	    println "=" + request.getRequestedSessionId() 
-		println "+" + servletContext.getAttribute("test2")
-	/*	params.each{
-			println "##" + it
-		}*/
-        [roomInstance: new Room(params), userid : params["id"] ]
+		println "create room user : " + session["user"].getId()
+        [roomInstance: new Room(params), userid : session["user"].getId() ]
     }
 
     def save() {
-		println "save room " + params["id"]
-		params["admin.id"] = params["id"]
-        params["admin"]=["id":params["id"]]
+		println "save room " + session["user"].getId()
+		params["admin.id"] = session["user"].getId()
+        params["admin"]=["id":session["user"].getId()]
 		params.each{
 				println "##" + it
 		}
