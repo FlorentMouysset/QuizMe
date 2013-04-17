@@ -21,9 +21,13 @@ class RoomController {
 		def userid = user.getId()
 		def username = user.getNom()
 		def contextUserType = user.class.equals( Etudiant.class )
-        [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count(), userContextIsEtudiant : contextUserType, username : username ]
+        [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count(), userContextIsEtudiant : contextUserType, username : username, userid : userid ]
     }
 
+	def enter(){
+		println "a faire"
+	}
+	
     def create() {
 		println "create room user : " + session["user"].getId()
         [roomInstance: new Room(params), userid : session["user"].getId() ]

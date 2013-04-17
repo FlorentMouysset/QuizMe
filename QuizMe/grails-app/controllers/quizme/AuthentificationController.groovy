@@ -77,7 +77,7 @@ class AuthentificationController {
 	def redirecListForum(userObj){
 		println "authen reussie " + userObj.getId() 
 		def userid = userObj.getId().toString()
-		session.setMaxInactiveInterval(120)
+		session.setMaxInactiveInterval(1200)
 		servletContext[userid] = userObj //on met l'utilisateur dans le context pour controler l'unicité de la connexion de cette utilisateur
 		servletContext[userid+"session"]=session
 		servletContext[session.id] = session.id //unicité de la session sur l'agent de l'utilisateur
