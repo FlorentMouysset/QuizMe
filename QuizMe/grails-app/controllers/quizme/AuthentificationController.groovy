@@ -11,9 +11,12 @@ class AuthentificationController {
 
 
 	def logout() {
-		params.each{
-			println "##" + it
-		}
+		/*params.each{
+		 println "##" + it
+		 }*/
+		servletContext.removeAttribute(params["id"])
+		servletContext.removeAttribute(session.id)
+
 		println "déconnexion de " + params["id"]
 		session.removeAttribute(params["id"])
 		[params : params]
@@ -21,6 +24,15 @@ class AuthentificationController {
 
 
 	def identification(){
+		println "*********************************"
+		println "*********************************"
+		println "SS : " + request.getSession(true)
+		println "SNEW : " + request.getSession().isNew()
+		println "SID : " + request.getSession().getId()
+		println "~ : " + request.getRequestedSessionId()
+		println "V : " + session.getId()
+
+
 		def idUser = params["idField"]
 		def mdpUser = params["textMdp"]
 
@@ -28,14 +40,46 @@ class AuthentificationController {
 
 		if(userObj != null){
 			def verif = session.getAttribute(userObj.getId().toString())
+
 			if(verif!= null){
 				println "session existante pour cette utilisateur"
 				params["cause"] = "Une session est déjà ouverte !"
 				redirect(action: "errorIdent", params: params)
+			}else if(servletContext[userObj.getId().toString()] != null){
+				println "compte déjà connecté !"
+				params["cause"] = "Votre compte est déjà ouvert !"
+				redirect(action: "errorIdent", params: params)
+			}else if(servletContext[session.id] != null){
+				println "dejà session d'un utilisateur!"
+				params["cause"] = "Un utilisateur est déjà connecté !"
+				redirect(action: "errorIdent", params: params)
 			}else{
-				session.setAttribute(userObj.getId().toString(), userObj)
-				assert userObj == session.getAttribute(userObj.getId().toString())
+
+				servletContext[userObj.getId().toString()] = userObj
+				servletContext[session.id] = session.id
+
+				def myse = request.getSession(true)
+				println myse.id
+
+				/*	servletContext.getProperties().each{
+				 println "| key" + it.key + " val=" + it.value 
+				 }
+				 servletContext.setAttribute("test2", userObj.getId().toString())
+				 def user = request['user']
+				 request['user'] = userObj.getId().toString()
+				 println session.new
+				 print session.getId()*/
+				//		myse.setAttribute("test",userObj.getId().toString() )
+				//println "QQ" + myse.getAttribute("test")
+				//	def cookieService
+				//	cookieService.setCookie('username','cookieUser123')
+				response.setCookie('userid',userObj.getId().toString(),604800)
+				//	response.setCookie('username','cookieUser123')
+				println "CK-auth " + request.getCookie('userid')
+				//assert userObj == myse.getAttribute("test")
 				println "authen reussie"
+				session.setAttribute(userObj.getId().toString(), userObj)
+
 				params["userid"] = userObj.getId()
 				redirect(controller: "room", action: "index", params: params)
 			}
@@ -47,6 +91,12 @@ class AuthentificationController {
 	}
 
 	def index() {
+		println "################################"
+		println "################################"
+		println "SS : " + request.getSession(true)
+
+		//http://localhost:8090/QuizMe/
+
 		//		println "ici index authen controller"
 		//		println( params)
 		redirect(action: "list", params: params)

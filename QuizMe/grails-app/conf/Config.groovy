@@ -11,6 +11,20 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+
+grails.plugin.cookiesession.enabled = true
+grails.plugin.cookiesession.encryptcookie = true
+grails.plugin.cookiesession.cryptoalgorithm = "Blowfish"
+grails.plugin.cookiesession.secret = "This is my secret."
+grails.plugin.cookiesession.cookiecount = 10
+grails.plugin.cookiesession.maxcookiesize = 2048  // 2kb
+grails.plugin.cookiesession.sessiontimeout = 3600 // one hour
+grails.plugin.cookiesession.cookiename = 'gsession'
+grails.plugin.cookiesession.condenseexceptions = false
+grails.plugin.cookiesession.serializer = 'kryo'
+grails.plugin.cookiesession.springsecuritycompatibility = true
+
+
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false

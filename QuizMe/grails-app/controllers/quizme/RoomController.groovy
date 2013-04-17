@@ -9,11 +9,34 @@ class RoomController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
+		println "index room"
         redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
-		println "list room " + params["userid"] + " " + params["id"] 
+		println "list room " + params["userid"] + " " + params["id"]
+		
+		def myse = request.getSession()
+		
+		println myse.id
+		println myse.getAt("test")
+		println "CK-Room " +  request.getCookie('userid')
+		
+		//println "REQ : " + request
+		//println "HEAD : " + request.getHeader("User-Agent")
+		//println "CP : " + request.getContextPath()
+		//println "SS : " + request.getSession(true) 
+		//println "HN : " + request.getHeaderNames();
+		
+		println session.getAt("test")
+	/*	println "-" + request.getSession().getAttribute("test")
+		println "=" + request.getRequestedSessionId()
+		println "+" + servletContext.getAttribute("test2")
+		println "*" + request['user']
+		request['user'] = params["userid"]
+		println "**" + request['user']
+		assert params["userid"] == request.user
+		*/
 		def userid // l'user id peut provenir de 2 manière pas userid ou id
 		if(params["userid"] != null){
 			userid = params["userid"]
@@ -32,6 +55,9 @@ class RoomController {
 
     def create() {
 		println "create room " + params["id"]
+		println request.getSession().getAttribute("test")
+	    println "=" + request.getRequestedSessionId() 
+		println "+" + servletContext.getAttribute("test2")
 	/*	params.each{
 			println "##" + it
 		}*/
