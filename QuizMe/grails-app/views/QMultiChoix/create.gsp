@@ -30,13 +30,15 @@
 			</ul>
 			</g:hasErrors>
 			
+			<g:render template="form"/>
+			
 			<g:form method="post" controller="QMultiChoix">
-				<fieldset class="form">
+				<fieldset class="form"><%--
 					<g:render template="form"/>
-				</fieldset>
+				--%></fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit  name="create" class="save" action="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-					<g:actionSubmit name="addReponse" class="save" action="save2" value="${message(code: 'Add Reponse')}" />
+					<%--<g:actionSubmit name="addReponse" class="save" action="save2" value="${message(code: 'Add Reponse')}" />--%>
 				</fieldset>
 			</g:form>
 		</div>

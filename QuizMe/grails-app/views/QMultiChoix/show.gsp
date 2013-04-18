@@ -37,7 +37,7 @@
 					<span id="reponses-label" class="property-label"><g:message code="QMultiChoix.reponses.label" default="Reponses" /></span>
 					
 						<g:each in="${QMultiChoixInstance.reponses}" var="r">
-						<span class="property-value" aria-labelledby="reponses-label"><g:link controller="reponse" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="reponses-label"><g:link controller="reponse" action="show" id="${r.id}">${r.answer?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

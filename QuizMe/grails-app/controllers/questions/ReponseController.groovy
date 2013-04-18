@@ -16,7 +16,7 @@ class ReponseController {
     }
 
     def create() {
-		println "params : "+params
+		println "ResponseCreate params : "+params
 		if(params["QMultiChoix.id"]!=null){
 			params["idQuestion"] = params["QMultiChoix.id"]
 		}
@@ -36,9 +36,9 @@ class ReponseController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'reponse.label', default: 'Reponse'), reponseInstance.id])
-        //println reponseInstance.question.getClass().name
+
 		def cont = reponseInstance.question.getClass().name.toString().replaceAll("questions.", "")
-		//println "cont : "+cont
+
 		redirect(controller: cont, action: "edit", id: params["question.id"])
     }
 

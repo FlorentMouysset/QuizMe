@@ -27,11 +27,11 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
+			<g:render template="form"/>
 			<g:form method="post" >
 				<g:hiddenField name="id" value="${QMultiChoixInstance?.id}" />
 				<g:hiddenField name="version" value="${QMultiChoixInstance?.version}" />
 				<fieldset class="form">
-					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />

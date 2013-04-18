@@ -1,5 +1,6 @@
 package questions
 
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
 import org.hibernate.annotations.Cascade;
 import org.springframework.dao.DataIntegrityViolationException
 
@@ -17,7 +18,10 @@ class QMultiChoixController {
     }
 
     def create() {
+		println "QMC params : "+params
+		session.removeAttribute("Question.id")
         [QMultiChoixInstance: new QMultiChoix(params)]
+		println "QMC params after create : "+params
     }
 
     def save() {
@@ -49,7 +53,7 @@ class QMultiChoixController {
             redirect(action: "list")
             return
         }
-
+		session["Question.id"] = id
         [QMultiChoixInstance: QMultiChoixInstance]
     }
 
@@ -93,10 +97,6 @@ class QMultiChoixController {
 		println "ca passe!"
 
         try {
-			
-//			QMultiChoixInstance.reponses.each{
-//				it.delete(flush : true)
-//			}
             QMultiChoixInstance.delete(flush: true)
 			println "test"
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
@@ -111,15 +111,26 @@ class QMultiChoixController {
 	
 	//save la question + rediriger vers add reponse
 	def save2() {
-		def QMultiChoixInstance = new QMultiChoix(params)
-		if (!QMultiChoixInstance.save(flush: true)) {
-			render(view: "create", model: [QMultiChoixInstance: QMultiChoixInstance])
-			return
-		}
+		println "QMC params save2 : "+params
+		//recuperer contenu du formulaire, pas ici dans le form ?
+		println "question.id = "+session["Question.id"]
+		if(session["Question.id"]==null) {
+			//premier passage creation new question
+			def QMultiChoixInstance = new QMultiChoix(params)
+			if (!QMultiChoixInstance.save(flush: true)) {
+				render(view: "create", model: [QMultiChoixInstance: QMultiChoixInstance])
+				return
+			}
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
-		params.clear()
-		params["idQuestion"] = QMultiChoixInstance.id
+			flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
+			params.clear()
+			params["idQuestion"] = QMultiChoixInstance.id
+		} else {
+			params.clear()
+			params["idQuestion"] = session["Question.id"]
+			session.removeAttribute("Question.id")
+			println " remove question.id = "+session["Question.id"]
+		}
 		redirect(controller: "reponse", action: "create", params: params)
 	}
 }
