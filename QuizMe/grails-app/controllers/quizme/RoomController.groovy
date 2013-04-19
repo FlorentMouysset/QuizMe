@@ -3,6 +3,7 @@ package quizme
 import org.springframework.dao.DataIntegrityViolationException
 
 import user.Etudiant
+import user.User
 
 class RoomController {
 
@@ -20,7 +21,7 @@ class RoomController {
 		def user = session.getAttribute("user") //récupération de l'utilisateur
 		def userid = user.getId()
 		def username = user.getNom()
-		def contextUserType = user.class.equals( Etudiant.class )
+		def contextUserType = Etudiant.estEtudiant(user)
         [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count(), userContextIsEtudiant : contextUserType, username : username, userid : userid ]
     }
 
@@ -28,20 +29,20 @@ class RoomController {
 		params.each{
 			println "##" + it
 		}
-		def userId = session.getAttribute("user").getId()
+		def userId = session.getAttribute("user").getId().toString()
 		println "enter :  " + userId + " veut enter " + params["id"]
 		
 		def room = Room.findById(params["id"])//récupération de la room
 		
-		def rep;
-		if(room.admin.id == userId){//si l'utilisateur est l'administrateur alors ouverture direct
+		boolean rep;
+		if(room.admin.id.toString() == userId){//si l'utilisateur est l'administrateur alors ouverture direct
 			rep = true
 		}else{
 			rep = room.estParticipant(userId)//sinon l'utilisateur est-il un participant ?
 		}
 		println "E " + rep
 		if(rep){//si ouverture ok
-			session["room"] = room
+			session["room.id"] = room.id
 			redirect(action: "inroom")
 		}else{//sinon authentification requise
 			redirect(action: "identification", id : params["id"])
@@ -59,8 +60,7 @@ class RoomController {
 		if(room.mdp == mdpRoom){
 			println "entre ds room + ajout participant " + session.getAttribute("user")  
 			room.addParticipant(session.getAttribute("user"))
-			//room.addParticipant(session.getAttribute("user").getId())
-			session["room"] = room
+			session["room.id"] = room.id
 			redirect(action: "inroom")
 		}else{
 			redirect(action: "identification", id : params["id"])
@@ -69,7 +69,12 @@ class RoomController {
 	
 	def inroom(){
 		println "inroom"
-		[params:params]
+		String userId = session["user.id"]
+		String roomId = session["room.id"]
+		def user = User.findById(userId)
+		def contextUserType = Etudiant.estEtudiant(user)
+		println "-- " + contextUserType + " " + user
+		[roomInstance: Room.findById(roomId), userContextIsEtudiant : contextUserType]
 	}
 	
     def create() {

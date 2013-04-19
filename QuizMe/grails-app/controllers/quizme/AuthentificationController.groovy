@@ -26,13 +26,13 @@ class AuthentificationController {
 
 
 	def identification(){
-		println "*********************************"
+/*		println "*********************************"
 		println "*********************************"
 		println "SS : " + request.getSession(true)
 		println "SNEW : " + request.getSession().isNew()
 		println "SID : " + request.getSession().getId()
 		println "~ : " + request.getRequestedSessionId()
-		println "V : " + session.getId()
+		println "V : " + session.getId()*/
 
 
 		def idUser = params["idField"]
@@ -83,6 +83,7 @@ class AuthentificationController {
 		servletContext[session.id] = session.id //unicité de la session sur l'agent de l'utilisateur
 		//session.setAttribute(userObj.getId().toString(), userObj)
 		session.setAttribute("user", userObj )//attachement de l'utilisateur à la session
+		session.setAttribute("user.id", userObj.id )
 		redirect(controller: "room", action: "index", params: params)
 	}
 

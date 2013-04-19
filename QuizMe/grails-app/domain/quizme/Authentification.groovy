@@ -52,6 +52,8 @@ class Authentification {
 		clo()		
 		
 		println "authen domain nb users :" + User.count
+	//	println "== " + User.findById(1)
+	//	println "--" + Etudiant.findById(1)
 		def list = User.all
 		//println User.all
 		def find = null

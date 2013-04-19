@@ -16,4 +16,9 @@ class Etudiant extends User {
 		"Etudiant [numEtudiant=" + numEtudiant + "]"
 	}*/	
 	
+	static boolean estEtudiant(def user){
+		user.class.equals( Etudiant.class )
+	}
+	
+	
 }
