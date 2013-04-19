@@ -57,8 +57,9 @@ class RoomController {
 		def mdpRoom = params["textMdp"]
 		def room = Room.findById(params["id"])
 		if(room.mdp == mdpRoom){
-			println "entre ds room + ajout participant"
-			room.addParticipant(session.getAttribute("user").getId())
+			println "entre ds room + ajout participant " + session.getAttribute("user")  
+			room.addParticipant(session.getAttribute("user"))
+			//room.addParticipant(session.getAttribute("user").getId())
 			session["room"] = room
 			redirect(action: "inroom")
 		}else{

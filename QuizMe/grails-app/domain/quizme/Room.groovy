@@ -8,8 +8,8 @@ class Room {
 	String nom
 	String mdp
 	Professeur admin
-	static hasMany = [sessions:Session]
-	static hasManyParticipants = [participants:Etudiant]
+	//static hasMany = [sessions:Session, etudiants:Etudiant]
+	static hasMany = [ etudiants:Etudiant, sessions:Session]
 	
 		
     static constraints = {
@@ -22,9 +22,9 @@ class Room {
 		println "estPartici " + idDemande
 		//def f = participants.findById(idDemande)
 	//	def f = hasManyParticipants.findById(idDemande)
-		hasManyParticipants.each{
-			println "##" + it
-		}
+	//	hasManyParticipants.each{
+	//		println "##" + it
+	//	}
 		
 		def f = false
 		println ">" + f
@@ -32,8 +32,10 @@ class Room {
 	}
 	
 	
-	def addParticipant(def idEtudiant){
-		println "add particiant " + idEtudiant
-		
+	def addParticipant(def etudiant){
+		println "add particiant " + etudiant.getId()
+		println "##" + Etudiant.findById(etudiant.getId())
+		addToSessions(new Session())
+		addToEtudiants(Etudiant.findById(etudiant.getId()))
 	}
 }
