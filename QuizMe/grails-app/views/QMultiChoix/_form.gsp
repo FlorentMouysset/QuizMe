@@ -1,14 +1,20 @@
 <%@ page import="questions.QMultiChoix" %>
 
-
-
+<g:form controller="QMultiChoix" action="save2" >
+	
+	
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'enonce', 'error')} required">
 	<label for="enonce">
 		<g:message code="QMultiChoix.enonce.label" default="Enonce" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="enonce" required="" value="${QMultiChoixInstance?.enonce}"/>
-</div>
+	
+	
+	<g:textField name="enonce" required=""  value="${QMultiChoixInstance?.enonce}"/><%--
+	
+	nonce  : ${enonce.getText()}  : fin_enonce
+--%></div>
+
 
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'reponses', 'error')} ">
 	<label for="reponses">
@@ -17,14 +23,16 @@
 	
 <ul class="one-to-many">
 <g:each in="${QMultiChoixInstance?.reponses?}" var="r">
-    <li><g:link controller="reponse" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
+    <li><g:link controller="reponse" action="show" id="${r.id}">${r.answer?.encodeAsHTML()}</g:link></li>
 </g:each>
 <li class="add">
-<g:link controller="reponse" action="create" params="['QMultiChoix.id': QMultiChoixInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>
-<%--<g:link controller="QMultiChoix" action="save2" params="['QMultiChoix.id': QMultiChoixInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>--%>
+<%--<g:link controller="reponse" action="create" params="['QMultiChoix.id': QMultiChoixInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>--%>
+<%--<g:link controller="QMultiChoix" action="save2" >${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>--%>
+	
+		<g:submitButton name="addReponse" value="add Reponse"  />
+	
 </li>
 </ul>
-<p> TODO : Bouton add reponse en bas qui save + ajoute reponse : enlever ce champ</p>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'statut', 'error')} required">
@@ -35,4 +43,6 @@
 	<g:select name="statut" from="${questions.QStatut?.values()}" keys="${questions.QStatut.values()*.name()}" required="" value="${QMultiChoixInstance?.statut?.name()}"/>
 	<p> TODO : Statut cree par defaut : enlever ce champ</p>
 </div>
+
+</g:form>
 
