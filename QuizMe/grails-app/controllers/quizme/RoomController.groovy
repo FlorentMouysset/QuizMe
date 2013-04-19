@@ -25,7 +25,50 @@ class RoomController {
     }
 
 	def enter(){
-		println "a faire"
+		params.each{
+			println "##" + it
+		}
+		def userId = session.getAttribute("user").getId()
+		println "enter :  " + userId + " veut enter " + params["id"]
+		
+		def room = Room.findById(params["id"])//récupération de la room
+		
+		def rep;
+		if(room.admin.id == userId){//si l'utilisateur est l'administrateur alors ouverture direct
+			rep = true
+		}else{
+			rep = room.estParticipant(userId)//sinon l'utilisateur est-il un participant ?
+		}
+		println "E " + rep
+		if(rep){//si ouverture ok
+			session["room"] = room
+			redirect(action: "inroom")
+		}else{//sinon authentification requise
+			redirect(action: "identification", id : params["id"])
+		}
+	}
+	
+	def identification(){
+		[params:params, roomId : params["id"]]
+	}
+	
+	def enterRequest(){
+		println "enterRequest"
+		def mdpRoom = params["textMdp"]
+		def room = Room.findById(params["id"])
+		if(room.mdp == mdpRoom){
+			println "entre ds room + ajout participant"
+			room.addParticipant(session.getAttribute("user").getId())
+			session["room"] = room
+			redirect(action: "inroom")
+		}else{
+			redirect(action: "identification", id : params["id"])
+		}
+	}
+	
+	def inroom(){
+		println "inroom"
+		[params:params]
 	}
 	
     def create() {
