@@ -15,21 +15,19 @@ class RoomController {
     }
 
     def list(Integer max) {
-		println "list room user : " + session["user"].getId()
+		println "list room user : " + session["user.id"]
         params.max = Math.min(max ?: 10, 100)
 
-		def user = session.getAttribute("user") //récupération de l'utilisateur
-		def userid = user.getId()
+		def userid = session.getAttribute("user.id") //récupération de l'utilisateur
+		def user = User.findById(userid)
 		def username = user.getNom()
 		def contextUserType = Etudiant.estEtudiant(user)
         [roomInstanceList: Room.list(params), roomInstanceTotal: Room.count(), userContextIsEtudiant : contextUserType, username : username, userid : userid ]
     }
 
 	def enter(){
-		params.each{
-			println "##" + it
-		}
-		def userId = session.getAttribute("user").getId().toString()
+		String userId = session.getAttribute("user.id") //récupération de l'utilisateur
+		
 		println "enter :  " + userId + " veut enter " + params["id"]
 		
 		def room = Room.findById(params["id"])//récupération de la room
@@ -40,7 +38,6 @@ class RoomController {
 		}else{
 			rep = room.estParticipant(userId)//sinon l'utilisateur est-il un participant ?
 		}
-		println "E " + rep
 		if(rep){//si ouverture ok
 			session["room.id"] = room.id
 			redirect(action: "inroom")
@@ -58,8 +55,10 @@ class RoomController {
 		def mdpRoom = params["textMdp"]
 		def room = Room.findById(params["id"])
 		if(room.mdp == mdpRoom){
-			println "entre ds room + ajout participant " + session.getAttribute("user")  
-			room.addParticipant(session.getAttribute("user"))
+			//println "entre ds room + ajout participant " + session.getAttribute("user")  
+			def userid = session.getAttribute("user.id") //récupération de l'utilisateur
+			def user = User.findById(userid)
+			room.addParticipant(user)
 			session["room.id"] = room.id
 			redirect(action: "inroom")
 		}else{
@@ -73,19 +72,19 @@ class RoomController {
 		String roomId = session["room.id"]
 		def user = User.findById(userId)
 		def contextUserType = Etudiant.estEtudiant(user)
-		println "-- " + contextUserType + " " + user
+		//println "-- " + contextUserType + " " + user
 		[roomInstance: Room.findById(roomId), userContextIsEtudiant : contextUserType]
 	}
 	
     def create() {
-		println "create room user : " + session["user"].getId()
-        [roomInstance: new Room(params), userid : session["user"].getId() ]
+		println "create room user : " + session["user.id"]
+        [roomInstance: new Room(params), userid : session["user.id"] ]
     }
 
     def save() {
-		println "save room " + session["user"].getId()
-		params["admin.id"] = session["user"].getId()
-        params["admin"]=["id":session["user"].getId()]
+		println "save room " + session["user.id"]
+		params["admin.id"] = session["user.id"]
+        params["admin"]=["id":session["user.id"]]
 		params.each{
 				println "##" + it
 		}

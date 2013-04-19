@@ -2,20 +2,20 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: sessionInstance, field: 'etat', 'error')} required">
-	<label for="etat">
-		<g:message code="session.etat.label" default="Etat" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select name="etat" from="${quizme.SessionEtat?.values()}" keys="${quizme.SessionEtat.values()*.name()}" required="" value="${sessionInstance?.etat?.name()}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: sessionInstance, field: 'nom', 'error')} ">
 	<label for="nom">
 		<g:message code="session.nom.label" default="Nom" />
 		
 	</label>
 	<g:textField name="nom" value="${sessionInstance?.nom}"/>
+</div>
+
+<div class="fieldcontain">
+ <label>
+ 	Ajouter des questions
+ </label>
+<g:link controller="question" class="create" action="create" >Créé des questions</g:link>
+
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: sessionInstance, field: 'questions', 'error')} ">
@@ -25,4 +25,3 @@
 	</label>
 	<g:select name="questions" from="${questions.Question.list()}" multiple="multiple" optionKey="id" size="5" value="${sessionInstance?.questions*.id}" class="many-to-many"/>
 </div>
-

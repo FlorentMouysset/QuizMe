@@ -2,9 +2,6 @@ package quizme
 
 import org.springframework.dao.DataIntegrityViolationException
 
-import user.Etudiant;
-import user.User
-
 class AuthentificationController {
 
 	static allowedMethods = [ index : "POST", save: "POST", update: "POST", delete: "POST"]
@@ -12,7 +9,7 @@ class AuthentificationController {
 
 	def logout() {
 		//println "OLD déconnexion de " + params["id"]
-		def userid = session["user"].getId().toString()
+		String userid = session["user.id"]
 		println "déconnexion de " + userid
 		
 		//println "getServletContext()> "+ session.getServletContext() 
@@ -20,7 +17,8 @@ class AuthentificationController {
 		servletContext.removeAttribute(userid)
 		servletContext.removeAttribute(session.id)
 		servletContext.removeAttribute(userid+"session")
-		session.removeAttribute("user")
+		//session.removeAttribute("user")
+		session.removeAttribute("user.id")
 		[params : params]
 	}
 
@@ -41,11 +39,14 @@ class AuthentificationController {
 		def userObj = Authentification.identification(idUser, mdpUser)
 
 		if(userObj != null){//verif authentification ok
+
 			def userid = userObj.getId().toString()
+			
 			if(servletContext[session.id] != null){
 				println "dejà session d'un utilisateur!"
 				params["cause"] = "Un utilisateur est déjà connecté !"
 				redirect(action: "errorIdent", params: params)
+				
 			}else if(servletContext[userid] != null){
 				println "compte déjà connecté !"
 				def s = servletContext[userid+"session"]
@@ -77,12 +78,12 @@ class AuthentificationController {
 	def redirecListForum(userObj){
 		println "authen reussie " + userObj.getId() 
 		def userid = userObj.getId().toString()
-		session.setMaxInactiveInterval(1200)
-		servletContext[userid] = userObj //on met l'utilisateur dans le context pour controler l'unicité de la connexion de cette utilisateur
+		session.setMaxInactiveInterval(1200)//20 min
+		servletContext[userid] = userid //on met l'utilisateur dans le context pour controler l'unicité de la connexion de cette utilisateur
 		servletContext[userid+"session"]=session
 		servletContext[session.id] = session.id //unicité de la session sur l'agent de l'utilisateur
 		//session.setAttribute(userObj.getId().toString(), userObj)
-		session.setAttribute("user", userObj )//attachement de l'utilisateur à la session
+	//	session.setAttribute("user", userObj )//attachement de l'utilisateur à la session
 		session.setAttribute("user.id", userObj.id )
 		redirect(controller: "room", action: "index", params: params)
 	}
@@ -95,12 +96,14 @@ class AuthentificationController {
 
 	}
 
+	
 	def list(Integer max) {
 		println "ici list authen controller"
 		params.max = Math.min(max ?: 10, 100)
 		[authentificationInstanceList: Authentification.list(params), authentificationInstanceTotal: Authentification.count()]
 	}
 
+	/*
 	def create() {
 		[authentificationInstance: new Authentification(params)]
 	}
@@ -184,5 +187,5 @@ class AuthentificationController {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'authentification.label', default: 'Authentification'), id])
 			redirect(action: "show", id: id)
 		}
-	}
+	}*/
 }
