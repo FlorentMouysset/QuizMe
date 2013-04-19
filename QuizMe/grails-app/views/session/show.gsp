@@ -23,11 +23,31 @@
 			</g:if>
 			<ol class="property-list session">
 			
+				<g:if test="${sessionInstance?.etat}">
+				<li class="fieldcontain">
+					<span id="etat-label" class="property-label"><g:message code="session.etat.label" default="Etat" /></span>
+					
+						<span class="property-value" aria-labelledby="etat-label"><g:fieldValue bean="${sessionInstance}" field="etat"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${sessionInstance?.nom}">
 				<li class="fieldcontain">
 					<span id="nom-label" class="property-label"><g:message code="session.nom.label" default="Nom" /></span>
 					
 						<span class="property-value" aria-labelledby="nom-label"><g:fieldValue bean="${sessionInstance}" field="nom"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${sessionInstance?.questions}">
+				<li class="fieldcontain">
+					<span id="questions-label" class="property-label"><g:message code="session.questions.label" default="Questions" /></span>
+					
+						<g:each in="${sessionInstance.questions}" var="q">
+						<span class="property-value" aria-labelledby="questions-label"><g:link controller="question" action="show" id="${q.id}">${q?.encodeAsHTML()}</g:link></span>
+						</g:each>
 					
 				</li>
 				</g:if>

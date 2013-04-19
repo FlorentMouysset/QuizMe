@@ -24,6 +24,8 @@
 				<thead>
 					<tr>
 					
+						<g:sortableColumn property="etat" title="${message(code: 'session.etat.label', default: 'Etat')}" />
+					
 						<g:sortableColumn property="nom" title="${message(code: 'session.nom.label', default: 'Nom')}" />
 					
 					</tr>
@@ -32,7 +34,9 @@
 				<g:each in="${sessionInstanceList}" status="i" var="sessionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${sessionInstance.id}">${fieldValue(bean: sessionInstance, field: "nom")}</g:link></td>
+						<td><g:link action="show" id="${sessionInstance.id}">${fieldValue(bean: sessionInstance, field: "etat")}</g:link></td>
+					
+						<td>${fieldValue(bean: sessionInstance, field: "nom")}</td>
 					
 					</tr>
 				</g:each>
