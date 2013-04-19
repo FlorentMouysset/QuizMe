@@ -1,4 +1,5 @@
 <%@ page import="questions.QMultiChoix" %>
+<%@ page import="questions.QStatut" %>
 
 <g:form controller="QMultiChoix" action="save2" >
 	
@@ -36,12 +37,13 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'statut', 'error')} required">
-	<label for="statut">
+	<%--<label for="statut">
 		<g:message code="QMultiChoix.statut.label" default="Statut" />
 		<span class="required-indicator">*</span>
-	</label>
-	<g:select name="statut" from="${questions.QStatut?.values()}" keys="${questions.QStatut.values()*.name()}" required="" value="${QMultiChoixInstance?.statut?.name()}"/>
-	<p> TODO : Statut cree par defaut : enlever ce champ</p>
+	</label>--%>
+	<g:hiddenField name="statut" required="" value="${questions.QStatut.Cree}"/>
+	<%--<g:select name="statut" from="${questions.QStatut?.values()}" keys="${questions.QStatut.values()*.name()}" required="" value="${QMultiChoixInstance?.statut?.name()}"/>--%>
+	<p><%-- TODO : Statut cree par defaut : enlever ce champ--%></p>
 </div>
 
 </g:form>
