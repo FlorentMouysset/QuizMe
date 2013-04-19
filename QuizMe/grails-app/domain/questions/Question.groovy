@@ -4,7 +4,7 @@ import user.Professeur
 
 class Question {
 	String enonce
-	QStatut statut
+	//QStatut statut
 
     static constraints = {
 		enonce(blank:false)

@@ -26,7 +26,7 @@
 					
 						<g:sortableColumn property="enonce" title="${message(code: 'question.enonce.label', default: 'Enonce')}" />
 					
-						<g:sortableColumn property="statut" title="${message(code: 'question.statut.label', default: 'Statut')}" />
+						<%--<g:sortableColumn property="statut" title="${message(code: 'question.statut.label', default: 'Statut')}" />--%>
 					
 					</tr>
 				</thead>
@@ -36,7 +36,7 @@
 					
 						<td><g:link controller="${questionInstance.getClass().getName().replaceFirst("questions.", "")}" action="show" id="${questionInstance.id}">${fieldValue(bean: questionInstance, field: "enonce")}</g:link></td>
 					
-						<td>${fieldValue(bean: questionInstance, field: "statut")}</td>
+						<%--<td>${fieldValue(bean: questionInstance, field: "statut")}</td>--%>
 					
 					</tr>
 				</g:each>

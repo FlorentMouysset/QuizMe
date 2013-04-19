@@ -26,7 +26,7 @@
 					
 						<g:sortableColumn property="enonce" title="${message(code: 'QMultiChoix.enonce.label', default: 'Enonce')}" />
 										
-						<g:sortableColumn property="statut" title="${message(code: 'QMultiChoix.statut.label', default: 'Statut')}" />
+						<%--<g:sortableColumn property="statut" title="${message(code: 'QMultiChoix.statut.label', default: 'Statut')}" />--%>
 					
 					</tr>
 				</thead>
@@ -36,7 +36,7 @@
 					
 						<td><g:link action="show" id="${QMultiChoixInstance.id}">${fieldValue(bean: QMultiChoixInstance, field: "enonce")}</g:link></td>
 					
-						<td>${fieldValue(bean: QMultiChoixInstance, field: "statut")}</td>
+						<%--<td>${fieldValue(bean: QMultiChoixInstance, field: "statut")}</td>--%>
 					
 					</tr>
 				</g:each>

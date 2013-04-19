@@ -43,14 +43,14 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${QMultiChoixInstance?.statut}">
+				<%--<g:if test="${QMultiChoixInstance?.statut}">
 				<li class="fieldcontain">
 					<span id="statut-label" class="property-label"><g:message code="QMultiChoix.statut.label" default="Statut" /></span>
 					
 						<span class="property-value" aria-labelledby="statut-label"><g:fieldValue bean="${QMultiChoixInstance}" field="statut"/></span>
 					
 				</li>
-				</g:if>
+				</g:if>--%>
 			
 			</ol>
 			<g:form>
