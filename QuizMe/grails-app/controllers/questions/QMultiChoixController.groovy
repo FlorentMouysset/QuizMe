@@ -112,7 +112,7 @@ class QMultiChoixController {
 	//save la question + rediriger vers add reponse
 	def save2() {
 		println "QMC params save2 : "+params
-		//recuperer contenu du formulaire, pas ici dans le form ?
+		//Recuperer contenu du formulaire, pas ici dans le form ?
 		println "question.id = "+session["Question.id"]
 		if(session["Question.id"]==null) {
 			//premier passage creation new question
