@@ -10,8 +10,8 @@
 		<a href="#create-QMultiChoix" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li><g:link controller="authentification" class="home" action="logout" >Logout</g:link></li>
+				<li><g:link class="list" action="create" controller="session"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		
@@ -30,14 +30,26 @@
 			</ul>
 			</g:hasErrors>
 			
-			<g:render template="form"/>
+			<%--<g:render template="form"/>--%>	
 			
-			<g:form method="post" controller="QMultiChoix">
-				<fieldset class="form"><%--
+			<g:form method="post" controller="QMultiChoix" action="saveOrUpdate">
+			<div class="fieldcontain">
+				<label for="choix"> <g:message
+						code="QMultiChoix.enonce.label" default="Choix action" /> <span
+					class="required-indicator">*</span>
+				</label>
+				
+				<g:radioGroup name="myAction" labels="['Add reponse','Update']"
+					values="[1,2]" value="1">
+					<p>${it.label} ${it.radio}</p>
+				</g:radioGroup>
+			</div>
+				<fieldset class="form">
 					<g:render template="form"/>
-				--%></fieldset>
+				</fieldset>
 				<fieldset class="buttons">
-					<g:actionSubmit  name="create" class="save" action="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<g:submitButton name="submitButton" value="Submit"/>
+					<%--<g:actionSubmit  name="create" class="save" controller="QMultiChoix" action="saveOrUpdate" value="${message(code: 'default.button.create.label', default: 'Create')}" />--%>
 					<%--<g:actionSubmit name="addReponse" class="save" action="save2" value="${message(code: 'Add Reponse')}" />--%>
 				</fieldset>
 			</g:form>

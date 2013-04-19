@@ -23,5 +23,7 @@
 		<g:message code="session.questions.label" default="Questions" />
 		
 	</label>
-	<g:select name="questions" from="${questions.Question.list()}" multiple="multiple" optionKey="id" size="5" value="${sessionInstance?.questions*.id}" class="many-to-many"/>
+	<g:each in="${listNomNewQuestion}" var="nomQ">
+		${nomQ}
+	</g:each>
 </div>

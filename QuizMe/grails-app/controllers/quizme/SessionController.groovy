@@ -2,6 +2,8 @@ package quizme
 
 import org.springframework.dao.DataIntegrityViolationException
 
+import questions.Question
+
 class SessionController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -16,7 +18,20 @@ class SessionController {
     }
 
     def create() {
-        [sessionInstance: new Session(params)]
+		
+		def listQ = session["newquestion"] 
+
+		
+		def it = listQ.iterator()
+		def listNomQ = ["e"]
+		while(it.hasNext()){
+			def q = Question.get(it.next())
+			
+			listNomQ = listNomQ + q.getEnonce()
+	
+		}
+
+        [sessionInstance: new Session(params), listNomNewQuestion : listNomQ ]
     }
 
     def save() {

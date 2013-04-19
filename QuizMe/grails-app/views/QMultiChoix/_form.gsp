@@ -1,6 +1,5 @@
 <%@ page import="questions.QMultiChoix" %>
 
-<g:form controller="QMultiChoix" action="save2" >
 	
 	
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'enonce', 'error')} required">
@@ -10,10 +9,8 @@
 	</label>
 	
 	
-	<g:textField name="enonce" required=""  value="${QMultiChoixInstance?.enonce}"/><%--
-	
-	nonce  : ${enonce.getText()}  : fin_enonce
---%></div>
+	<g:textField name="enonce" required=""  value="${QMultiChoixInstance?.enonce}"/>
+</div>
 
 
 <div class="fieldcontain ${hasErrors(bean: QMultiChoixInstance, field: 'reponses', 'error')} ">
@@ -29,7 +26,7 @@
 <%--<g:link controller="reponse" action="create" params="['QMultiChoix.id': QMultiChoixInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>--%>
 <%--<g:link controller="QMultiChoix" action="save2" >${message(code: 'default.add.label', args: [message(code: 'reponse.label', default: 'Reponse')])}</g:link>--%>
 	
-		<g:submitButton name="addReponse" value="add Reponse"  />
+		<%--<g:submitButton name="addReponse" value="add Reponse"  />--%>
 	
 </li>
 </ul>
@@ -45,5 +42,5 @@
 	<p> TODO : Statut cree par defaut : enlever ce champ</p>
 </div>
 
---%></g:form>
+--%>
 
