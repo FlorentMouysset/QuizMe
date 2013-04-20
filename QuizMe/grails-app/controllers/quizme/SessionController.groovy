@@ -11,19 +11,19 @@ class SessionController {
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
 	/*
-	def index() {
-		redirect(action: "list", params: params)
-	}*/
+	 def index() {
+	 redirect(action: "list", params: params)
+	 }*/
 
 	/*
-	def list(Integer max) {
-		params.max = Math.min(max ?: 10, 100)
-		[sessionInstanceList: Session.list(params), sessionInstanceTotal: Session.count()]
-	}*/
+	 def list(Integer max) {
+	 params.max = Math.min(max ?: 10, 100)
+	 [sessionInstanceList: Session.list(params), sessionInstanceTotal: Session.count()]
+	 }*/
 
 
 	def createQuestion(){
-//		session["newquestion"] = null
+		//		session["newquestion"] = null
 		println "create question"
 		params.each{
 			println "##" + it
@@ -57,7 +57,7 @@ class SessionController {
 				listNomQ = listNomQ + Question.get(it.next())
 				//listNomQ = listNomQ + q.getEnonce()
 			}
-			
+
 			render(view: "create", model: [sessionInstance: sessionInstance, listQuestion : listNomQ])
 			return
 		}
@@ -73,7 +73,7 @@ class SessionController {
 		redirect( controller: "room", action: "inroom" )
 	}
 
-	
+
 	def enter(){
 		println "session id => " + params["id"]
 		session["sessionDomaine.id"] = params["id"]
@@ -84,7 +84,7 @@ class SessionController {
 			render(view: "elaboration", model: [sessionInstance: sessionInstance])
 		}
 	}
-	
+
 	def finelaboration(){
 		println "fin elaboration session = " + session["sessionDomaine.id"]
 		params.each{
@@ -102,7 +102,18 @@ class SessionController {
 		sessionInstance.elaborationAjoutProposition(map)
 		redirect( controller: "room", action: "inroom" )
 	}
-	
+
+
+	def validation(){
+		println "validation session"
+		params.each{
+			println "##" + it
+		}
+
+
+		redirect( controller: "room", action: "inroom" )
+	}
+
 	def statechange(){
 		println "state cahnge session"
 		params.each{
@@ -122,16 +133,15 @@ class SessionController {
 	}
 
 	/*
-	def show(Long id) {
-		def sessionInstance = Session.get(id)
-		if (!sessionInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'session.label', default: 'Session'), id])
-			redirect(action: "list")
-			return
-		}
-
-		[sessionInstance: sessionInstance]
-	}*/
+	 def show(Long id) {
+	 def sessionInstance = Session.get(id)
+	 if (!sessionInstance) {
+	 flash.message = message(code: 'default.not.found.message', args: [message(code: 'session.label', default: 'Session'), id])
+	 redirect(action: "list")
+	 return
+	 }
+	 [sessionInstance: sessionInstance]
+	 }*/
 
 	def edit(Long id) {
 		def sessionInstance = Session.get(id)
@@ -156,13 +166,14 @@ class SessionController {
 		}
 		session["session.origin"] = "edit"
 		session["session.id"] = id
-//		session["newquestion"] = null //nettoyage session
+		//		session["newquestion"] = null //nettoyage session
 		[sessionInstance: sessionInstance, listQuestion : listNomQ ]
 	}
 
 
 	def update(Long id, Long version) {
 		def sessionInstance = Session.get(id)
+		println "--* ici"
 		if (!sessionInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'session.label', default: 'Session'), id])
 			redirect( controller: "room", action: "inroom" )
@@ -179,17 +190,33 @@ class SessionController {
 			}
 		}
 
+		params.each{
+			println "##" + it
+		}
 		sessionInstance.properties = params
+		sessionInstance.setNom(params["sessionNewName"])
 		sessionInstance.addQuestions(session["newquestion"])//ajout des questions à la session domaine
 		session["newquestion"] = null //nettoyage session
 
 		if (!sessionInstance.save(flush: true)) {
-			render(view: "edit", model: [sessionInstance: sessionInstance])
+			def listQ = session["newquestion"]
+			def it = listQ.iterator()
+			def listNomQ = []
+			while(it.hasNext()){
+				listNomQ = listNomQ + Question.get(it.next())
+				//listNomQ = listNomQ + q.getEnonce()
+			}
+			it = sessionInstance.questions.iterator()
+			while(it.hasNext()){
+				listNomQ = listNomQ +it.next()
+				//listNomQ = listNomQ + q.getEnonce()
+			}
+			render(view: "edit", model: [sessionInstance: sessionInstance, listQuestion : listNomQ])
 			return
 		}
 
 		flash.message = message(code: 'default.updated.message', args: [message(code: 'session.label', default: 'Session'), sessionInstance.id])
-			redirect( controller: "room", action: "inroom" )
+		redirect( controller: "room", action: "inroom" )
 	}
 
 	def delete(Long id) {
