@@ -34,8 +34,13 @@ class QElaborationController {
 		addToSession(QElaborationInstance)
 		
         flash.message = message(code: 'default.created.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), QElaborationInstance.id])
-        //redirect(action: "show", id: QElaborationInstance.id)
-		redirect(controller: "session", action: "create")
+
+		String action = session["session.origin"]
+		println "TEST action : "+action
+		if(action.equals("edit"))
+		redirect(controller: "session", action: action, id: session["session.id"])
+		else
+		redirect(controller: "session", action: action)
     }
 
     def show(Long id) {
@@ -86,8 +91,12 @@ class QElaborationController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), QElaborationInstance.id])
-        //redirect(action: "show", id: QElaborationInstance.id)
-		redirect(controller: "session", action: "create")
+        String action = session["session.origin"]
+		println "TEST action : "+action
+		if(action.equals("edit"))
+			redirect(controller: "session", action: action, id: session["session.id"])
+		else
+			redirect(controller: "session", action: action)
     }
 
     def delete(Long id) {
