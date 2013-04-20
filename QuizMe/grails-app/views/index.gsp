@@ -94,7 +94,6 @@ p {
 		<div class="fieldcontain">
 			<label for="mdp"> Mot de passe : </label>
 			<g:passwordField name="textMdp" value="" />
-			<br />
 		</div>
 		
 		<div class="fieldcontain">

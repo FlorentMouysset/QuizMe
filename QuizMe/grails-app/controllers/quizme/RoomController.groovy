@@ -95,9 +95,10 @@ class RoomController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'room.label', default: 'Room'), roomInstance.id])
-        redirect(action: "show", id: roomInstance.id)
+        redirect(action: "list")
     }
 
+	/*
     def show(Long id) {
         def roomInstance = Room.get(id)
         if (!roomInstance) {
@@ -107,7 +108,7 @@ class RoomController {
         }
 
         [roomInstance: roomInstance]
-    }
+    }*/
 
     def edit(Long id) {
         def roomInstance = Room.get(id)
@@ -146,7 +147,7 @@ class RoomController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'room.label', default: 'Room'), roomInstance.id])
-        redirect(action: "show", id: roomInstance.id)
+        redirect(action: "list")
     }
 
     def delete(Long id) {
@@ -164,7 +165,7 @@ class RoomController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'room.label', default: 'Room'), id])
-            redirect(action: "show", id: id)
+            redirect(action: "list", id: id)
         }
     }
 }

@@ -8,11 +8,8 @@ class AuthentificationController {
 
 
 	def logout() {
-		//println "OLD déconnexion de " + params["id"]
 		String userid = session["user.id"]
 		println "déconnexion de " + userid
-		
-		//println "getServletContext()> "+ session.getServletContext() 
 		
 		servletContext.removeAttribute(userid)
 		servletContext.removeAttribute(session.id)
@@ -24,14 +21,6 @@ class AuthentificationController {
 
 
 	def identification(){
-/*		println "*********************************"
-		println "*********************************"
-		println "SS : " + request.getSession(true)
-		println "SNEW : " + request.getSession().isNew()
-		println "SID : " + request.getSession().getId()
-		println "~ : " + request.getRequestedSessionId()
-		println "V : " + session.getId()*/
-
 
 		def idUser = params["idField"]
 		def mdpUser = params["textMdp"]
@@ -82,8 +71,6 @@ class AuthentificationController {
 		servletContext[userid] = userid //on met l'utilisateur dans le context pour controler l'unicité de la connexion de cette utilisateur
 		servletContext[userid+"session"]=session
 		servletContext[session.id] = session.id //unicité de la session sur l'agent de l'utilisateur
-		//session.setAttribute(userObj.getId().toString(), userObj)
-	//	session.setAttribute("user", userObj )//attachement de l'utilisateur à la session
 		session.setAttribute("user.id", userObj.id )
 		redirect(controller: "room", action: "index", params: params)
 	}
@@ -93,14 +80,9 @@ class AuthentificationController {
 	}
 
 	def errorIdent(){
-
+		[params:params]
 	}
 
-	/*
-	def list(Integer max) {
-		println "ici list authen controller"
-		params.max = Math.min(max ?: 10, 100)
-		[authentificationInstanceList: Authentification.list(params), authentificationInstanceTotal: Authentification.count()]
-	}*/
+
 
 	}

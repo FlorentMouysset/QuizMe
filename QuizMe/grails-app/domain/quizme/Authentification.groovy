@@ -52,17 +52,12 @@ class Authentification {
 		clo()		
 		
 		println "authen domain nb users :" + User.count
-	//	println "== " + User.findById(1)
-	//	println "--" + Etudiant.findById(1)
 		def list = User.all
-		//println User.all
 		def find = null
 		
 		def it = list.iterator()
-		//println "#" +it.hasNext() 
 		while(it.hasNext() && find==null ){
 			def user = it.next()
-			//println "##" + user.getIdentifiants().getLogin()  + " " + login + " " + user.getIdentifiants().getPassword() +" "+  mdp
 			if (user.getIdentifiants().getLogin() == login &&  user.getIdentifiants().getPassword() == mdp){
 				println "find !"
 				find = user
