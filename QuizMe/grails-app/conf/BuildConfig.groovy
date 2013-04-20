@@ -49,7 +49,7 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.8.3"
         runtime ":resources:1.1.6"
 
-		compile ':cookie:0.4'
+	//	compile ':cookie:0.4'
 		
 //	runtime ":cookie-session:2.0.7"
 //	compile ':spring-security-core:1.2.7.3'

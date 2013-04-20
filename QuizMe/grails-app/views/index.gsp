@@ -81,17 +81,30 @@ p {
 </head>
 <body>
 
-	<g:form controller="authentification" action="identification" >
-	
-	Identifiant :
-		<g:textField name="idField" value=""/> <br /> Mot de passe :
-		<g:passwordField name="textMdp" value="" /> <br/>
+<h1>QuizMe</h1>
+<h2>Portail d'authentification</h2>
+
+	<g:form controller="authentification" action="identification">
+
+		<div class="fieldcontain">
+			<label for="identi"> Identifiant : </label>
+			<g:textField name="idField" value="" />
+		</div>
 		
-		<g:submitButton name="valBoutonIdentification" value="identification"  />
+		<div class="fieldcontain">
+			<label for="mdp"> Mot de passe : </label>
+			<g:passwordField name="textMdp" value="" />
+			<br />
+		</div>
+		
+		<div class="fieldcontain">
+			<fieldset class="buttons">
+				<g:submitButton name="valBoutonIdentification"
+					value="Identification" />
+			</fieldset>
+		</div>
+
 	</g:form>
-
-
-
 
 </body>
 </html>
