@@ -44,7 +44,7 @@
 							<fieldset class="checkBox">
 								${reponse.answer}
 								<g:checkBox name="${question.id}-${reponse.id}"
-									value="${false} " />
+									checked="false" />
 							</fieldset>
 						</g:each>
 					</g:if>
