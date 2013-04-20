@@ -3,13 +3,16 @@ package quizme
 import questions.QElaboration
 import questions.Question
 import questions.Reponse
+import questions.Resultat
 
 class Session {
 	
 	String nom
 	SessionEtat etat
-	
-	static hasMany  = [questions : Question ]
+	//def mapResultats
+//	static hasMany  = [mapResultats : Map, questions : Question ]
+	static hasMany  = [ questions : Question ]
+	static hasOne = [mapResultats: Map]
 	static mapping = {
 		questions cascade: 'all'
 	}
@@ -41,7 +44,7 @@ class Session {
 	}
 
 	void elaborationAjoutProposition(Map map){
-		map.each{
+		mapResultats.each{
 			def idQ = it.key
 			def reponse = it.value
 			if(reponse != ""){
@@ -51,6 +54,45 @@ class Session {
 				question.addToReponses( rep )
 			}
 		}
+	}
+
+	boolean aParticipe(String userid){
+		if(mapResultats!=null){
+			mapResultats.containsKey(userid.toString())
+		}else{
+			false
+		}
+	}
+		
+	void ajoutParticipation(def userid, def param){
+		def rep = [:]
+		param.each{
+			println "##" + it
+		}
+		questions.each {
+			if (Question.isMultiChoix(it.getId()) ){
+				String base = it.getId().toString() + "-"
+				def repAux = [:]
+				it.reponses.each{
+					//					println "ici >" + base + it.getId()
+					//					println "--" + params[base +  it.getId()]
+					repAux[it.getId().toString()] =  param[base +  it.getId()] != null
+				}
+				rep[it.getId().toString()] = repAux
+			}else{
+				//				println "-> " + params[it.getId().toString()]
+				rep[it.getId().toString()] =  param[it.getId().toString()] != null
+			}
+		}
+		rep.each{
+			println "key " + it.key
+			println "value " + it.value
+		}
+		if(mapResultats == null){
+			mapResultats = [:]
+		}
+		mapResultats.put(userid, rep)
+		println "ici"
 	}
 	
 }

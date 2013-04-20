@@ -68,7 +68,15 @@ class SessionController {
 		println "session id => " + params["id"]
 		session["sessionDomaine.id"] = params["id"]
 		def sessionInstance = Session.findById(params["id"])
-		if(sessionInstance.getEtat() != SessionEtat.ELABORATION){
+
+	//	println "*/* " + sessionInstance.aParticipe(session["user.id"].toString())
+	//	println "*-*" + sessionInstance.mapResultats.containsKey(session["user.id"].toString())
+	//	sessionInstance.mapResultats[session["user.id"].toString()]=null
+		if( sessionInstance.aParticipe(session["user.id"].toString()) ){
+			redirect( controller: "room", action: "inroom" )
+		}
+		
+		if(sessionInstance.getEtat() != SessionEtat.ELABORATION ){
 			render(view: "insession", model: [sessionInstance: sessionInstance])
 		}else{
 			render(view: "elaboration", model: [sessionInstance: sessionInstance])
@@ -90,6 +98,7 @@ class SessionController {
 		}
 		println "** " + sessionInstance
 		sessionInstance.elaborationAjoutProposition(map)
+		
 		redirect( controller: "room", action: "inroom" )
 	}
 
@@ -100,7 +109,14 @@ class SessionController {
 			println "##" + it
 		}
 
-
+		def sessionInstance = Session.findById(session["sessionDomaine.id"].toString())		
+		sessionInstance.ajoutParticipation(session["user.id"].toString(), params)	
+		sessionInstance.mapResultats.each{
+			println "#key " + it.key
+			println "#value " + it.value
+		}
+		println "{{" + sessionInstance.mapResultats.containsKey(session["user.id"].toString())
+		
 		redirect( controller: "room", action: "inroom" )
 	}
 
