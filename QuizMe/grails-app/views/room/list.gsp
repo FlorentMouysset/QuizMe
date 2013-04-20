@@ -13,7 +13,7 @@
 	${username}
 	choisissez une room
 	<g:if test="${userContextIsEtudiant==false}">
-		<br />Ou créé une nouvelle room		
+		<br />Ou creez une nouvelle room		
 		</g:if>
 	<a href="#list-room" class="skip" tabindex="-1"><g:message
 			code="default.link.skip.label" default="Skip to content&hellip;" /></a>
