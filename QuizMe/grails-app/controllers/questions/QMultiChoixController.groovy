@@ -30,10 +30,27 @@ class QMultiChoixController {
             render(view: "create", model: [QMultiChoixInstance: QMultiChoixInstance])
             return
         }
+//		if(session["newquestion"] == null){
+//			session["newquestion"] = [QMultiChoixInstance.id]
+//		}else{
+//			session["newquestion"]  = session["newquestion"]  + QMultiChoixInstance.id
+//		}
+//					session["newquestion"].each{
+//			println "C2 " + it
+//		}
 		
         flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
-        redirect(action: "show", id: QMultiChoixInstance.id)
-    }
+        //redirect(action: "show", id: QMultiChoixInstance.id)
+		String action = session["session.origin"]
+		println "TEST action : "+action
+		
+		addToSession(QMultiChoixInstance)
+		
+		if(action.equals("edit"))
+			redirect(controller: "session", action: action, id: session["session.id"])
+		else
+			redirect(controller: "session", action: action)
+	}
 
     def show(Long id) {
         def QMultiChoixInstance = QMultiChoix.get(id)
@@ -83,7 +100,8 @@ class QMultiChoixController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
-        redirect(action: "show", id: QMultiChoixInstance.id)
+        //redirect(action: "show", id: QMultiChoixInstance.id)
+		redirect(controller: "session", action: "create")
     }
 
     def delete(Long id) {
@@ -125,14 +143,7 @@ class QMultiChoixController {
 			session["newquestion"].each{
 				println "C1 " + it
 			}
-			if(session["newquestion"] == null){
-				session["newquestion"] = [QMultiChoixInstance.id]
-			}else{
-				session["newquestion"]  = session["newquestion"]  + QMultiChoixInstance.id
-			}
-						session["newquestion"].each{
-				println "C2 " + it
-			}
+			addToSession(QMultiChoixInstance)
 			
 			flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
 			params.clear()
@@ -149,13 +160,30 @@ class QMultiChoixController {
 	def saveOrUpdate() {
 		println "params saveOrUpdate : "+params
 		println "myAction : "+params["myAction"]
-		if(params["myAction"].equals("1")) {
+		if(params["myAction"].equals("1")) {//add reponse -> save2
 			println "GOTO save2"
 			redirect(action: "save2", params:params)
-		} else {
-			println "GOTO update"
-			update(Long.parseLong(params["id"]), Long.parseLong(params["version"]))
-			//redirect(action: "update", params:params)
+		} else {//save or update here
+			if(params["id"]==null) {
+				println "GOTO save"
+				save()
+			}
+			else {
+				println "GOTO update"
+				update(Long.parseLong(params["id"]), Long.parseLong(params["version"]))
+			}
 		}
 	}
+	
+	def addToSession(def qInstance) {
+		if(session["newquestion"] == null){
+			session["newquestion"] = [qInstance.id]
+		}else{
+			session["newquestion"]  = session["newquestion"]  + qInstance.id
+		}
+					session["newquestion"].each{
+			println "C2 " + it
+		}
+	}
+	
 }

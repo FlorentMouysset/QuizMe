@@ -42,7 +42,7 @@ class SessionController {
 			listNomQ = listNomQ + q.getEnonce()
 	
 		}
-
+		session["session.origin"] = "create"
         [sessionInstance: new Session(params), listNomNewQuestion : listNomQ ]
     }
 
@@ -114,6 +114,8 @@ class SessionController {
 			listNomQ = listNomQ + q.getEnonce()
 	
 		}
+		session["session.origin"] = "edit"
+		session["session.id"] = id
         [sessionInstance: sessionInstance, listNomNewQuestion : listNomQ ]
     }
 
