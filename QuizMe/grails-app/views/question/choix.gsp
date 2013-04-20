@@ -1,5 +1,6 @@
 <%@ page import="questions.Question" %>
 <%@ page import="questions.QMultiChoix" %>
+<%@ page import="questions.QElaboration" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,8 +23,7 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 		</div>
-		<!– TODO : Moche, ne respecte pas MVC Voir peut etre l indexORIGIN le each controller 
-					Rajouter import question pour la faire apparaitre –!>
+		<!– TODO : Moche, Rajouter import question pour la faire apparaitre –!>
 		<table>
 			<g:if test="${QMultiChoix}">
 			<tr>

@@ -4,7 +4,7 @@ import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
 import org.hibernate.annotations.Cascade;
 import org.springframework.dao.DataIntegrityViolationException
 
-class QMultiChoixController {
+class QElaborationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
@@ -30,14 +30,7 @@ class QMultiChoixController {
             render(view: "create", model: [QMultiChoixInstance: QMultiChoixInstance])
             return
         }
-//		if(session["newquestion"] == null){
-//			session["newquestion"] = [QMultiChoixInstance.id]
-//		}else{
-//			session["newquestion"]  = session["newquestion"]  + QMultiChoixInstance.id
-//		}
-//					session["newquestion"].each{
-//			println "C2 " + it
-//		}
+
 		addToSession(QMultiChoixInstance)
 		
         flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
