@@ -8,7 +8,6 @@ class Room {
 	String nom
 	String mdp
 	Professeur admin
-	//static hasMany = [sessions:Session, etudiants:Etudiant]
 	static hasMany = [ etudiants:Etudiant, sessions:Session]
 	
 		
