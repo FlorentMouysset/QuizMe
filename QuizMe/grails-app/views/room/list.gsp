@@ -44,8 +44,14 @@
 					<g:sortableColumn property="nom"
 						title="${message(code: 'room.nom.label', default: 'Nom')}" />
 
-					<g:sortableColumn property="nom" title="Responsable" />
+					<g:sortableColumn property="nom" title="Administrateur" />
 
+					<g:if test="${userContextIsEtudiant==false}">
+							<th>Action administrateur</th>
+					</g:if>
+
+					<th> Action</th>					
+					
 				</tr>
 			</thead>
 			<tbody>

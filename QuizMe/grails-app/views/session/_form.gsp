@@ -7,7 +7,7 @@
 		<g:message code="session.nom.label" default="Nom" />
 		
 	</label>
-	<g:textField name="nom" value="${sessionInstance?.nom}"/>
+	<g:textField name="sessionNewName" value="${sessionInstance?.nom}"/>
 </div>
 
 <div class="fieldcontain">
@@ -23,7 +23,9 @@
 		<g:message code="session.questions.label" default="Questions" />
 		
 	</label>
+	<ul>
 	<g:each in="${listNomNewQuestion}" var="nomQ">
-		${nomQ}
+		<li > ${nomQ} <br/></li>
 	</g:each>
+	</ul>
 </div>

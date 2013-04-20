@@ -25,12 +25,17 @@ class Room {
 	}
 	
 	
-	def addParticipant(def etudiant){
+	void addParticipant(def etudiant){
 		//def etudiantId =  etudiant.getId().toString()
 		//println "add particiant " + etudiantId
 		//println "AA " + Etudiant.findById(etudiantId)
 		//addToSessions(new Session())
 		addToEtudiants(etudiant)
-		println "VERIF " +  estParticipant(etudiant.id.toString())
+	//	println "VERIF " +  estParticipant(etudiant.id.toString())
 	}
+	
+	void addSession(String idSession){
+		addToSessions(Session.get(idSession))
+	}
+	
 }
