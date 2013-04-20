@@ -9,6 +9,5 @@ class QMultiChoix extends Question {
 	}
 
     static constraints = {
-		//possibilité de verifier au moins 2 reponses entrees?
     }
 }
