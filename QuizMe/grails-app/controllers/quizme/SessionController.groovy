@@ -19,7 +19,16 @@ class SessionController {
     }
 	
 
-
+	def createQuestion(){
+		
+		println "create question"
+		params.each{
+			println "##" + it
+		}
+		
+		redirect( controller: "question", action: "create" )
+	}
+	
     def create() {
 		
 		def listQ = session["newquestion"] 

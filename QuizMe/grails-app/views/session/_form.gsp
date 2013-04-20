@@ -8,14 +8,16 @@
 		
 	</label>
 	<g:textField name="sessionNewName" value="${sessionInstance?.nom}"/>
+	
 </div>
 
 <div class="fieldcontain">
  <label>
  	Ajouter des questions
  </label>
-<g:link controller="question" class="create" action="create" >Créé des questions</g:link>
+ <g:javascript> g= document.forms['createForm'].elements['sessionNewName'].value  </g:javascript>
 
+<g:link class="create" action="createQuestion" id="${g }" params="${sessionInstance?.nom}" >Créé des questions</g:link>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: sessionInstance, field: 'questions', 'error')} ">
