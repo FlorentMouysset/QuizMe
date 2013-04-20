@@ -228,4 +228,20 @@ class SessionController {
 			redirect( controller: "room", action: "inroom" )
 		}
 	}
+	
+	
+	def reformuler(){
+		def sessionInstance = Session.findById(params["id"])
+		session["sessionDomaine.id"] = params["id"]
+		[sessionInstance : sessionInstance]
+	}
+	
+	def finreformulation(){
+		def sessionInstance = Session.findById(session["sessionDomaine.id"].toString())
+		
+		
+		
+		sessionInstance.evolutionEtat()
+		redirect( controller: "room", action: "inroom" )
+	}
 }

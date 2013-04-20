@@ -80,10 +80,17 @@
 										Evoluer vers l'état élaboration collective
 										</g:link>
 
-									</g:if> <g:elseif test="${ ! s.etat.equals(SessionEtat.FIN)}">
+									</g:if> <g:elseif test="${ ! s.etat.equals(SessionEtat.FIN) & ! s.etat.equals(SessionEtat.REFORMULATION)}">
 										<g:link class="edit" action="statechange" controller="session"
 											id="${s?.id}">
 										Evoluer l'état
+										</g:link>
+
+									</g:elseif>
+									<g:elseif test="${s.etat.equals(SessionEtat.REFORMULATION)}">
+										<g:link class="edit" action="reformuler" controller="session"
+											id="${s?.id}">
+										Reformuler
 										</g:link>
 
 									</g:elseif></td>
