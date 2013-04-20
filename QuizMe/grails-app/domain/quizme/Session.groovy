@@ -8,7 +8,8 @@ class Session {
 	
 	String nom
 	SessionEtat etat
-	static hasMany  = [questions : Question ]	
+	
+	static hasMany  = [questions : Question ]
 	static mapping = {
 		questions cascade: 'all'
 	}
@@ -45,7 +46,7 @@ class Session {
 			def reponse = it.value
 			if(reponse != ""){
 				def question = QElaboration.findById(idQ)
-				println "--"  + idQ + " " + reponse + " " + question
+//				println "--"  + idQ + " " + reponse + " " + question
 				def rep = new Reponse(answer:reponse, question:question)
 				question.addToReponses( rep )
 			}
