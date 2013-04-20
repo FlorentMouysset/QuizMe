@@ -101,7 +101,12 @@ class QMultiChoixController {
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
         //redirect(action: "show", id: QMultiChoixInstance.id)
-		redirect(controller: "session", action: "create")
+		String action = session["session.origin"]
+		println "TEST action : "+action
+		if(action.equals("edit"))
+		redirect(controller: "session", action: action, id: session["session.id"])
+		else
+		redirect(controller: "session", action: action)
     }
 
     def delete(Long id) {
