@@ -33,15 +33,6 @@
 				</li>
 				</g:if>
 			
-				<%--<g:if test="${questionInstance?.statut}">
-				<li class="fieldcontain">
-					<span id="statut-label" class="property-label"><g:message code="question.statut.label" default="Statut" /></span>
-					
-						<span class="property-value" aria-labelledby="statut-label"><g:fieldValue bean="${questionInstance}" field="statut"/></span>
-					
-				</li>
-				</g:if>--%>
-			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">

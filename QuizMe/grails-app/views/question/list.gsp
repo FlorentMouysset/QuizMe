@@ -26,9 +26,7 @@
 					<tr>
 					
 						<g:sortableColumn property="enonce" title="${message(code: 'question.enonce.label', default: 'Enonce')}" />
-					
-						<%--<g:sortableColumn property="statut" title="${message(code: 'question.statut.label', default: 'Statut')}" />--%>
-					
+										
 					</tr>
 				</thead>
 				<tbody>
