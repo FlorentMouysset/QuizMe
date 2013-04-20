@@ -1,6 +1,6 @@
 package questions;
 
-public enum QStatut {
+public enum QStatut {//Deprecie
 	
 	//Cree mais non visible par autres users
 	Cree,
