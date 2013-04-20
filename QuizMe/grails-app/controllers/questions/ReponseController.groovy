@@ -143,4 +143,16 @@ class ReponseController {
 		redirect(controller: cont, action: "show", id: params["question.id"])
 	}
 	
+	def saveVraiFaux() {
+		println "saveReponseVraiFaux , params : "+params
+		params["question.id"] = params['id']
+		params["question"] = ["id":params["id"]]
+		def reponseInstance = new Reponse(params)
+		println "ici saveVraiFaux"
+		if (!reponseInstance.save(flush: true)) {
+			render(view: "create", model: [reponseInstance: reponseInstance])
+			return
+		}
+	}
+	
 }

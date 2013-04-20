@@ -11,7 +11,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><g:link controller="authentification" class="home" action="logout" >Logout</g:link></li>
-				<li><g:link class="list" action="create" controller="session"><g:message code="Session" /></g:link></li>
+				<li><g:link class="list" action="inroom" controller="room" ><g:message code="Session List"/></g:link></li>
 			</ul>
 		</div>
 		
