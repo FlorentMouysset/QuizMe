@@ -11,7 +11,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><g:link controller="authentification" class="home" action="logout" >Logout</g:link></li>
-				<li><g:link class="list" action="create" controller="session"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" action="create" controller="session"><g:message code="Session" /></g:link></li>
 			</ul>
 		</div>
 		
@@ -39,7 +39,7 @@
 					class="required-indicator">*</span>
 				</label>
 				
-				<g:radioGroup name="myAction" labels="['Add reponse','Update']"
+				<g:radioGroup name="myAction" labels="['Add reponse','Save']"
 					values="[1,2]" value="1">
 					<p>${it.label} ${it.radio}</p>
 				</g:radioGroup>

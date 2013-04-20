@@ -37,7 +37,7 @@
 					class="required-indicator">*</span>
 				</label>
 				
-				<g:radioGroup name="myAction" labels="['Add reponse','Update']"
+				<g:radioGroup name="myAction" labels="['Add reponse','Save']"
 					values="[1,2]" value="1">
 					<p>${it.label} ${it.radio}</p>
 				</g:radioGroup>
