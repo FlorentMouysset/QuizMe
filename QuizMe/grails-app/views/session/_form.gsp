@@ -1,5 +1,5 @@
 <%@ page import="quizme.Session"%>
-
+<%@ page import="questions.Question"%>
 
 
 <div
@@ -28,9 +28,26 @@
 	</label>
 	<ul>
 		<g:each in="${listQuestion}" var="nomQ">
-			<li><g:link action="show" controller="question" id="${nomQ.id}">
+			<g:if test="${Question.isMultiChoix(nomQ.id) }">
+				<li><g:link action="show" controller="QMultiChoix" id="${nomQ.id}">
 					${nomQ.getEnonce()}
-				</g:link></li>
+					</g:link></li>
+			</g:if>
+			<g:if test="${Question.isTrueFalse(nomQ.id) }">
+				<li><g:link action="show" controller="QVraiFaux" id="${nomQ.id}">
+					${nomQ.getEnonce()}
+					</g:link></li>
+			</g:if>
+			<g:if test="${Question.isQElaboration(nomQ.id) }">
+				<li><g:link action="show" controller="QElaboration" id="${nomQ.id}">
+					${nomQ.getEnonce()}
+					</g:link></li>
+			</g:if>
+			<g:if test="${Question.isQLibre(nomQ.id) }">
+				<li><g:link action="show" controller="QLibre" id="${nomQ.id}">
+					${nomQ.getEnonce()}
+					</g:link></li>
+			</g:if>
 		</g:each>
 
 	</ul>

@@ -50,7 +50,15 @@ class SessionController {
 		 }*/
 		def sessionInstance = new Session(nom:params["sessionNewName"],etat: SessionEtat.CREATION )
 		if (!sessionInstance.save(flush: true)) {
-			render(view: "create", model: [sessionInstance: sessionInstance])
+			def listQ = session["newquestion"]
+			def it = listQ.iterator()
+			def listNomQ = []
+			while(it.hasNext()){
+				listNomQ = listNomQ + Question.get(it.next())
+				//listNomQ = listNomQ + q.getEnonce()
+			}
+			
+			render(view: "create", model: [sessionInstance: sessionInstance, listQuestion : listNomQ])
 			return
 		}
 		sessionInstance.addQuestions(session["newquestion"])//ajout des questions à la session domaine
