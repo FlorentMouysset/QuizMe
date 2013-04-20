@@ -68,7 +68,8 @@ class SessionController {
 		println "session id => " + params["id"]
 		session["sessionDomaine.id"] = params["id"]
 		def sessionInstance = Session.findById(params["id"])
-		if(sessionInstance.getEtat() != SessionEtat.ELABORATION){
+		
+		if(sessionInstance.getEtat() != SessionEtat.ELABORATION && !sessionInstance.aParticipe(session["user.id"]) ){
 			render(view: "insession", model: [sessionInstance: sessionInstance])
 		}else{
 			render(view: "elaboration", model: [sessionInstance: sessionInstance])
@@ -88,6 +89,7 @@ class SessionController {
 		map.each{
 			println "??" + it
 		}
+		
 		println "** " + sessionInstance
 		sessionInstance.elaborationAjoutProposition(map)
 		redirect( controller: "room", action: "inroom" )

@@ -8,7 +8,7 @@ class Session {
 	
 	String nom
 	SessionEtat etat
-	
+	Map map = [:];
 	static hasMany  = [questions : Question ]
 	static mapping = {
 		questions cascade: 'all'
@@ -51,6 +51,9 @@ class Session {
 				question.addToReponses( rep )
 			}
 		}
+	}
+	
+	boolean aParticipe(Long userid){
 	}
 	
 }
