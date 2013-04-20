@@ -6,10 +6,14 @@ class Session {
 	
 	String nom
 	SessionEtat etat
-	static hasMany  = [questions : Question ]
+	static hasMany  = [questions : Question ]	
+	static mapping = {
+		questions cascade: 'all'
+	}
 	
 	
     static constraints = {
+		nom(blank:false)
     }
 	
 	void addQuestions(List questionIdList){
@@ -32,4 +36,5 @@ class Session {
 	void evolutionElaboration(){
 		etat = SessionEtat.ELABORATION
 	}
+
 }

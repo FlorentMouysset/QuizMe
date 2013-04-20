@@ -37,4 +37,5 @@ class Room {
 		addToSessions(Session.get(idSession))
 	}
 	
+	
 }

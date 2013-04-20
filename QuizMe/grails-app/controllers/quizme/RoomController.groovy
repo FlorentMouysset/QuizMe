@@ -27,11 +27,8 @@ class RoomController {
 
 	def enter(){
 		String userId = session.getAttribute("user.id") //récupération de l'utilisateur
-		
 		println "enter :  " + userId + " veut enter " + params["id"]
-		
 		def room = Room.findById(params["id"])//récupération de la room
-		
 		boolean rep;
 		if(room.admin.id.toString() == userId){//si l'utilisateur est l'administrateur alors ouverture direct
 			rep = true
@@ -68,11 +65,12 @@ class RoomController {
 	
 	def inroom(){
 		println "inroom"
+		session["newquestion"] = null
 		String userId = session["user.id"]
 		String roomId = session["room.id"]
 		def user = User.findById(userId)
 		def contextUserType = Etudiant.estEtudiant(user)
-		//println "-- " + contextUserType + " " + user
+		def room = Room.findById(roomId)
 		[roomInstance: Room.findById(roomId), userContextIsEtudiant : contextUserType]
 	}
 	
@@ -85,9 +83,9 @@ class RoomController {
 		println "save room " + session["user.id"]
 		params["admin.id"] = session["user.id"]
         params["admin"]=["id":session["user.id"]]
-		params.each{
+	/*	params.each{
 				println "##" + it
-		}
+		}*/
         def roomInstance = new Room(params)
         if (!roomInstance.save(flush: true)) {
             render(view: "create", model: [roomInstance: roomInstance])
@@ -97,18 +95,6 @@ class RoomController {
         flash.message = message(code: 'default.created.message', args: [message(code: 'room.label', default: 'Room'), roomInstance.id])
         redirect(action: "list")
     }
-
-	/*
-    def show(Long id) {
-        def roomInstance = Room.get(id)
-        if (!roomInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'room.label', default: 'Room'), id])
-            redirect(action: "list")
-            return
-        }
-
-        [roomInstance: roomInstance]
-    }*/
 
     def edit(Long id) {
         def roomInstance = Room.get(id)

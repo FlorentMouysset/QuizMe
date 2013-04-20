@@ -63,7 +63,7 @@
 								${s.nom}
 							</td>
 							<td>
-								${s.questions.count }
+								${s.questions.size() }
 							</td>
 							<g:if test="${userContextIsEtudiant==false}">
 								<td><g:link class="edit" action="edit" controller="session"
