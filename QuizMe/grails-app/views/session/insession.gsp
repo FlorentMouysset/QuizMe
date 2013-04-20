@@ -43,23 +43,27 @@
 						<g:each in="${question?.reponses}" var="reponse">
 							<fieldset class="checkBox">
 								${reponse.answer}
-								<g:checkBox name="${question.id}-${reponse.id}" value="${false} " />
+								<g:checkBox name="${question.id}-${reponse.id}"
+									value="${false} " />
 							</fieldset>
 						</g:each>
 					</g:if>
-					
-					
+
+
 					<g:elseif test="${Question.isTrueFalse(question.id) }">
-						<g:radioGroup name="${question.id}"
-							labels="['Oui','Non']" values="[1,0]">
+						<g:radioGroup name="${question.id}" labels="['Oui','Non']"
+							values="[1,0]" value="1" >
 							<p>
 								${it.label}
 								${it.radio}
 							</p>
 						</g:radioGroup>
 					</g:elseif>
-					
-					
+
+					<g:elseif test="${Question.isQLibre(question.id) }">
+						<g:textField name="${question.id}"/>
+					</g:elseif>
+
 				</div>
 			</g:each>
 
