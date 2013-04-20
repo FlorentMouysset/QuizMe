@@ -1,6 +1,8 @@
 package quizme
 
+import questions.QElaboration
 import questions.Question
+import questions.Reponse
 
 class Session {
 	
@@ -37,4 +39,17 @@ class Session {
 		etat = SessionEtat.ELABORATION
 	}
 
+	void elaborationAjoutProposition(Map map){
+		map.each{
+			def idQ = it.key
+			def reponse = it.value
+			if(reponse != ""){
+				def question = QElaboration.findById(idQ)
+				println "--"  + idQ + " " + reponse + " " + question
+				def rep = new Reponse(answer:reponse, question:question)
+				question.addToReponses( rep )
+			}
+		}
+	}
+	
 }

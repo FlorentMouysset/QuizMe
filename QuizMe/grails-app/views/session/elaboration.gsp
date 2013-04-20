@@ -6,7 +6,9 @@
 <meta name="layout" content="main">
 <g:set var="entityName"
 	value="${message(code: 'session.label', default: 'Session')}" />
-<title>Vous êtez dans la session ${sessionInstance?.nom}</title>
+<title>Vous êtez dans la session ${sessionInstance?.nom} en mode
+	élaboration
+</title>
 </head>
 <body>
 	<a href="#edit-session" class="skip" tabindex="-1"><g:message
@@ -24,48 +26,42 @@
 		<h1>
 			Vous êtez dans la session
 			${sessionInstance?.nom}
+			en mode élaboration
 		</h1>
 		<g:form method="post">
 
 			<% cpt=0 %>
 			<g:each in="${sessionInstance?.questions}" var="question">
-				<%cpt ++ %>
 
 
-				<div class="fieldcontain">
-					<fieldset class="label">
-						<label for="questions"> Enonce de la question <%=cpt %> :
-						</label>
-						${question.getEnonce()}
-					</fieldset>
+				<g:if test="${Question.isQElaboration(question.id) }">
+					<%cpt ++ %>
+					<div class="fieldcontain">
+						<fieldset class="label">
+							<label for="questions"> Enonce de la question <%=cpt %> :
+							</label>
+							${question.getEnonce()}
+						</fieldset>
 
-					<g:if test="${Question.isMultiChoix(question.id) }">
 						<g:each in="${question?.reponses}" var="reponse">
-							<fieldset class="checkBox">
+						<fieldset class="checkBox">
+						
+							<label for="questions"> Proposition:</label>
 								${reponse.answer}
-								<g:checkBox name="${question.id}-${reponse.id}" value="${false} " />
 							</fieldset>
 						</g:each>
-					</g:if>
 					
-					
-					<g:elseif test="${Question.isTrueFalse(question.id) }">
-						<g:radioGroup name="${question.id}"
-							labels="['Oui','Non']" values="[1,0]">
-							<p>
-								${it.label}
-								${it.radio}
-							</p>
-						</g:radioGroup>
-					</g:elseif>
-					
-					
-				</div>
+					<fieldset class="textField">
+						<label for="questions"> Votre proposition: </label>
+						<g:textField name="${question.id}" value="" />
+					</fieldset>
+					</div>
+				</g:if>
 			</g:each>
 
 
 			<fieldset class="buttons">
-				<g:actionSubmit class="save" action="validation" value="Terminez" />
+				<g:actionSubmit class="save" action="finelaboration" value="Terminez" />
 			</fieldset>
 		</g:form>
 	</div>

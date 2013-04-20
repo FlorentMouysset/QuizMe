@@ -1,5 +1,6 @@
 package quizme
 
+import org.hibernate.proxy.map.MapProxyFactory;
 import org.springframework.dao.DataIntegrityViolationException
 
 import questions.Question
@@ -66,11 +67,33 @@ class SessionController {
 
 	
 	def enter(){
+		println "session id => " + params["id"]
 		session["sessionDomaine.id"] = params["id"]
 		def sessionInstance = Session.findById(params["id"])
-		render(view: "insession", model: [sessionInstance: sessionInstance])
+		if(sessionInstance.getEtat() != SessionEtat.ELABORATION){
+			render(view: "insession", model: [sessionInstance: sessionInstance])
+		}else{
+			render(view: "elaboration", model: [sessionInstance: sessionInstance])
+		}
 	}
 	
+	def finelaboration(){
+		println "fin elaboration session = " + session["sessionDomaine.id"]
+		params.each{
+			println "##" + it
+		}
+		def sessionInstance = Session.findById(session["sessionDomaine.id"].toString())
+		def map = params
+		map.remove("_action_finelaboration")
+		map.remove("action")
+		map.remove("controller")
+		map.each{
+			println "??" + it
+		}
+		println "** " + sessionInstance
+		sessionInstance.elaborationAjoutProposition(map)
+		redirect( controller: "room", action: "inroom" )
+	}
 	
 	def statechange(){
 		println "state cahnge session"

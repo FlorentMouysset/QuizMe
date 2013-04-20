@@ -10,4 +10,8 @@ class QElaboration extends Question {
 
     static constraints = {
     }
+	
+	/*def addReponse(){
+		addToReponses(reponse)
+	}*/
 }
