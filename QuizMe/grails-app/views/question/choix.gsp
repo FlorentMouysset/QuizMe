@@ -1,6 +1,5 @@
 <%@ page import="questions.Question" %>
 <%@ page import="questions.QMultiChoix" %>
-<%@ page import="questions.QVraiFaux" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,20 +22,29 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 		</div>
-		<!– TODO : Moche, ne respecte pas MVC Voir peut etre l indexORIGIN le each controller–!>
+		<!– TODO : Moche, ne respecte pas MVC Voir peut etre l indexORIGIN le each controller 
+					Rajouter import question pour la faire apparaitre –!>
 		<table>
+			<g:if test="${QMultiChoix}">
 			<tr>
-				<td><g:link controller="QMultiChoix" action="create">${QMultiChoix}</g:link></td>
+				<td><g:link controller="QMultiChoix" action="create">Choix multiples</g:link></td>
 			</tr>
+			</g:if>
+			<g:if test="${QVraiFaux}">
 			<tr>
-				<td><g:link controller="QVraiFaux" action="create">${QvraiFaux}</g:link></td>
+				<td><g:link controller="QVraiFaux" action="create">True/False</g:link></td>
 			</tr>
+			</g:if>
+			<g:if test="${QElaboration}">
 			<tr>
-				<td><g:link controller="QElaboration" action="create">${QElaboration}</g:link></td>
+				<td><g:link controller="QElaboration" action="create">Elaboration</g:link></td>
 			</tr>
+			</g:if>
+			<g:if test="${QLibre}">
 			<tr>
-				<td><g:link controller="QLibre" action="create">${QLibre}</g:link></td>
+				<td><g:link controller="QLibre" action="create">Libre</g:link></td>
 			</tr>
+			</g:if>
 
 		</table>
 		
