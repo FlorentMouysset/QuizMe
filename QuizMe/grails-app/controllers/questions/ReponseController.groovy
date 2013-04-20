@@ -112,4 +112,35 @@ class ReponseController {
         }
     }
 	
+	//reponse proposee par etudiant
+	def propose(Long id) {
+		println "propose ID recu : "+id
+		println "ResponseCreate params : "+params
+		params["idQuestion"] = id
+		println "idQuestion : "+params["idQuestion"]
+		[reponseInstance: new Reponse(params), idQuestion : params["idQuestion"] ]
+	}
+	
+	def saveEtudiant() {
+		println "saveEtudiantReponse , params : "+params
+		params["question.id"] = params['id']
+		params["question"] = ["id":params["id"]]
+		//Modif answer
+		def rep = params["answer"]
+		params["answer"]="Proposée par etudiant : "+rep
+		println "newAnswer : "+params["answer"]
+		def reponseInstance = new Reponse(params)
+		println "ici"
+		if (!reponseInstance.save(flush: true)) {
+			render(view: "create", model: [reponseInstance: reponseInstance])
+			return
+		}
+
+		flash.message = message(code: 'default.created.message', args: [message(code: 'reponse.label', default: 'Reponse'), reponseInstance.id])
+
+		def cont = reponseInstance.question.getClass().name.toString().replaceAll("questions.", "")
+
+		redirect(controller: cont, action: "show", id: params["question.id"])
+	}
+	
 }

@@ -1,5 +1,9 @@
 
 <%@ page import="questions.QMultiChoix" %>
+<%@ page import="user.Etudiant" %>
+<%@ page import="user.User" %>
+<%@ page import="user.Professeur" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -56,7 +60,12 @@
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${QMultiChoixInstance?.id}" />
-					<g:link class="edit" action="edit" id="${QMultiChoixInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:if test="${Professeur.estProfesseur(User.findById(session["user.id"])) }">
+						<g:link class="edit" action="edit" id="${QMultiChoixInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					</g:if>
+					<g:if test="${Etudiant.estEtudiant(User.findById(session["user.id"])) }">
+						<g:link controller="reponse" class="create" action="propose" id="${QMultiChoixInstance?.id}"><g:message code="Proposer une autre reponse" default="Proposer une autre reponse" /></g:link>
+					</g:if>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
