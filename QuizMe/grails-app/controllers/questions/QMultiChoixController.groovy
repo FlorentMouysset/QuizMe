@@ -30,7 +30,7 @@ class QMultiChoixController {
             render(view: "create", model: [QMultiChoixInstance: QMultiChoixInstance])
             return
         }
-
+		
         flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
         redirect(action: "show", id: QMultiChoixInstance.id)
     }
@@ -122,6 +122,18 @@ class QMultiChoixController {
 				return
 			}
 
+			session["newquestion"].each{
+				println "C1 " + it
+			}
+			if(session["newquestion"] == null){
+				session["newquestion"] = [QMultiChoixInstance.id]
+			}else{
+				session["newquestion"]  = session["newquestion"]  + QMultiChoixInstance.id
+			}
+						session["newquestion"].each{
+				println "C2 " + it
+			}
+			
 			flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
 			params.clear()
 			params["idQuestion"] = QMultiChoixInstance.id
@@ -132,5 +144,18 @@ class QMultiChoixController {
 			println " remove question.id = "+session["Question.id"]
 		}
 		redirect(controller: "reponse", action: "create", params: params)
+	}
+	
+	def saveOrUpdate() {
+		println "params saveOrUpdate : "+params
+		println "myAction : "+params["myAction"]
+		if(params["myAction"].equals("1")) {
+			println "GOTO save2"
+			redirect(action: "save2", params:params)
+		} else {
+			println "GOTO update"
+			update(Long.parseLong(params["id"]), Long.parseLong(params["version"]))
+			//redirect(action: "update", params:params)
+		}
 	}
 }
