@@ -14,6 +14,8 @@ class SessionController {
         params.max = Math.min(max ?: 10, 100)
         [sessionInstanceList: Session.list(params), sessionInstanceTotal: Session.count()]
     }
+	
+
 
     def create() {
         [sessionInstance: new Session(params)]
