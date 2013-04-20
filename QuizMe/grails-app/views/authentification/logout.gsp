@@ -16,7 +16,7 @@
 		</ul>
 	</div>
 
-	Vous ếtez déconnectés
+	Vous avez été déconnecté avec succés.
 
 
 

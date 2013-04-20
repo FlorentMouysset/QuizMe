@@ -14,13 +14,3 @@
 	</label>
 	<g:textField name="commentaire" value="${reponseInstance?.commentaire}"/>
 </div>
-
-<%--<div class="fieldcontain ${hasErrors(bean: reponseInstance, field: 'question', 'error')} required">
-	<label for="question">
-		<g:message code="reponse.question.label" default="Question" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="question" name="question.id" from="${questions.Question.list()}" optionKey="id" required="" value="${reponseInstance?.question?.id}" class="many-to-one"/>
-</div>
-
---%>

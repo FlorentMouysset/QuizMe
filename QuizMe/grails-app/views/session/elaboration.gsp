@@ -6,7 +6,7 @@
 <meta name="layout" content="main">
 <g:set var="entityName"
 	value="${message(code: 'session.label', default: 'Session')}" />
-<title>Vous êtez dans la session ${sessionInstance?.nom} en mode
+<title>Vous êtes dans la session ${sessionInstance?.nom} en mode
 	élaboration
 </title>
 </head>
@@ -24,7 +24,7 @@
 	</div>
 	<div id="edit-session" class="content scaffold-edit" role="main">
 		<h1>
-			Vous êtez dans la session
+			Vous êtes dans la session
 			${sessionInstance?.nom}
 			en mode élaboration
 		</h1>

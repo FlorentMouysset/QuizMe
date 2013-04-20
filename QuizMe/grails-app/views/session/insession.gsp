@@ -6,7 +6,7 @@
 <meta name="layout" content="main">
 <g:set var="entityName"
 	value="${message(code: 'session.label', default: 'Session')}" />
-<title>Vous êtez dans la session ${sessionInstance?.nom}</title>
+<title>Vous êtes dans la session ${sessionInstance?.nom}</title>
 </head>
 <body>
 	<a href="#edit-session" class="skip" tabindex="-1"><g:message
@@ -22,7 +22,7 @@
 	</div>
 	<div id="edit-session" class="content scaffold-edit" role="main">
 		<h1>
-			Vous êtez dans la session
+			Vous êtes dans la session
 			${sessionInstance?.nom}
 		</h1>
 		<g:form method="post">
