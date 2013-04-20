@@ -14,101 +14,101 @@ class QElaborationController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [QMultiChoixInstanceList: QMultiChoix.list(params), QMultiChoixInstanceTotal: QMultiChoix.count()]
+        [QElaborationInstanceList: QElaboration.list(params), QElaborationInstanceTotal: QElaboration.count()]
     }
 
     def create() {
 		println "QMC params : "+params
 		session.removeAttribute("Question.id")
-        [QMultiChoixInstance: new QMultiChoix(params)]
+        [QElaborationInstance: new QElaboration(params)]
 		println "QMC params after create : "+params
     }
 
     def save() {
-        def QMultiChoixInstance = new QMultiChoix(params)
-        if (!QMultiChoixInstance.save(flush: true)) {
-            render(view: "create", model: [QMultiChoixInstance: QMultiChoixInstance])
+        def QElaborationInstance = new QElaboration(params)
+        if (!QElaborationInstance.save(flush: true)) {
+            render(view: "create", model: [QElaborationInstance: QElaborationInstance])
             return
         }
 
-		addToSession(QMultiChoixInstance)
+		addToSession(QElaborationInstance)
 		
-        flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
-        //redirect(action: "show", id: QMultiChoixInstance.id)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), QElaborationInstance.id])
+        //redirect(action: "show", id: QElaborationInstance.id)
 		redirect(controller: "session", action: "create")
     }
 
     def show(Long id) {
-        def QMultiChoixInstance = QMultiChoix.get(id)
-        if (!QMultiChoixInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
+        def QElaborationInstance = QElaboration.get(id)
+        if (!QElaborationInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), id])
             redirect(action: "list")
             return
         }
 
-        [QMultiChoixInstance: QMultiChoixInstance]
+        [QElaborationInstance: QElaborationInstance]
     }
 
     def edit(Long id) {
-        def QMultiChoixInstance = QMultiChoix.get(id)
-        if (!QMultiChoixInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
+        def QElaborationInstance = QElaboration.get(id)
+        if (!QElaborationInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), id])
             redirect(action: "list")
             return
         }
 		session["Question.id"] = id
-        [QMultiChoixInstance: QMultiChoixInstance]
+        [QElaborationInstance: QElaborationInstance]
     }
 
     def update(Long id, Long version) {
-        def QMultiChoixInstance = QMultiChoix.get(id)
-        if (!QMultiChoixInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
+        def QElaborationInstance = QElaboration.get(id)
+        if (!QElaborationInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), id])
             redirect(action: "list")
             return
         }
 
         if (version != null) {
-            if (QMultiChoixInstance.version > version) {
-                QMultiChoixInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'QMultiChoix.label', default: 'QMultiChoix')] as Object[],
-                          "Another user has updated this QMultiChoix while you were editing")
-                render(view: "edit", model: [QMultiChoixInstance: QMultiChoixInstance])
+            if (QElaborationInstance.version > version) {
+                QElaborationInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                          [message(code: 'QElaboration.label', default: 'QElaboration')] as Object[],
+                          "Another user has updated this QElaboration while you were editing")
+                render(view: "edit", model: [QElaborationInstance: QElaborationInstance])
                 return
             }
         }
 
-        QMultiChoixInstance.properties = params
+        QElaborationInstance.properties = params
 
-        if (!QMultiChoixInstance.save(flush: true)) {
-            render(view: "edit", model: [QMultiChoixInstance: QMultiChoixInstance])
+        if (!QElaborationInstance.save(flush: true)) {
+            render(view: "edit", model: [QElaborationInstance: QElaborationInstance])
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
-        //redirect(action: "show", id: QMultiChoixInstance.id)
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), QElaborationInstance.id])
+        //redirect(action: "show", id: QElaborationInstance.id)
 		redirect(controller: "session", action: "create")
     }
 
     def delete(Long id) {
 		println "delete here"
-        def QMultiChoixInstance = QMultiChoix.get(id)
-        if (!QMultiChoixInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
+        def QElaborationInstance = QElaboration.get(id)
+        if (!QElaborationInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), id])
             redirect(action: "list")
             return
         }
 		println "ca passe!"
 
         try {
-            QMultiChoixInstance.delete(flush: true)
+            QElaborationInstance.delete(flush: true)
 			println "test"
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
 			println "Erreur detectee"
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), id])
             redirect(action: "show", id: id)
         }
     }
@@ -120,20 +120,20 @@ class QElaborationController {
 		println "question.id = "+session["Question.id"]
 		if(session["Question.id"]==null) {
 			//premier passage creation new question
-			def QMultiChoixInstance = new QMultiChoix(params)
-			if (!QMultiChoixInstance.save(flush: true)) {
-				render(view: "create", model: [QMultiChoixInstance: QMultiChoixInstance])
+			def QElaborationInstance = new QElaboration(params)
+			if (!QElaborationInstance.save(flush: true)) {
+				render(view: "create", model: [QElaborationInstance: QElaborationInstance])
 				return
 			}
 
 			session["newquestion"].each{
 				println "C1 " + it
 			}
-			addToSession(QMultiChoixInstance)
+			addToSession(QElaborationInstance)
 			
-			flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
+			flash.message = message(code: 'default.created.message', args: [message(code: 'QElaboration.label', default: 'QElaboration'), QElaborationInstance.id])
 			params.clear()
-			params["idQuestion"] = QMultiChoixInstance.id
+			params["idQuestion"] = QElaborationInstance.id
 		} else {
 			params.clear()
 			params["idQuestion"] = session["Question.id"]
