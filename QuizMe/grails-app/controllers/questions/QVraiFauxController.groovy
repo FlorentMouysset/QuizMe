@@ -150,7 +150,13 @@ class QVraiFauxController {
 		params.clear()
 		params["idQuestion"] = QVraiFauxInstance.id
 		String id = QVraiFauxInstance.id
-		redirect(action: "show", id: id)
+//		redirect(action: "show", id: id)
+		String action = session["session.origin"]
+		println "TEST action : "+action
+		if(action.equals("edit"))
+			redirect(controller: "session", action: action, id: session["session.id"])
+		else
+			redirect(controller: "session", action: action)
 	}
 
 	def saveOrUpdate() {

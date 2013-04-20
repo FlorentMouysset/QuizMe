@@ -12,8 +12,9 @@
 			<ul>
 				
 				<li><g:link controller="authentification" class="home" action="logout" >Logout</g:link></li>
-				<li><g:link class="list" action="create" controller="session"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="list" action="inroom" controller="room" ><g:message code="Session List"/></g:link></li>
+				<%--<li><g:link class="list" action="create" controller="session"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>--%>
 			</ul>
 		</div>
 		<div id="edit-QElaboration" class="content scaffold-edit" role="main">
