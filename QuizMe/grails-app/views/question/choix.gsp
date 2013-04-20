@@ -1,6 +1,7 @@
 <%@ page import="questions.Question" %>
 <%@ page import="questions.QMultiChoix" %>
 <%@ page import="questions.QElaboration" %>
+<%@ page import="questions.QVraiFaux" %>
 <!DOCTYPE html>
 <html>
 	<head>

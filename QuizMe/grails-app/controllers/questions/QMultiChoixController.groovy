@@ -38,12 +38,19 @@ class QMultiChoixController {
 //					session["newquestion"].each{
 //			println "C2 " + it
 //		}
-		addToSession(QMultiChoixInstance)
 		
         flash.message = message(code: 'default.created.message', args: [message(code: 'QMultiChoix.label', default: 'QMultiChoix'), QMultiChoixInstance.id])
         //redirect(action: "show", id: QMultiChoixInstance.id)
-		redirect(controller: "session", action: "create")
-    }
+		String action = session["session.origin"]
+		println "TEST action : "+action
+		
+		addToSession(QMultiChoixInstance)
+		
+		if(action.equals("edit"))
+			redirect(controller: "session", action: action, id: session["session.id"])
+		else
+			redirect(controller: "session", action: action)
+	}
 
     def show(Long id) {
         def QMultiChoixInstance = QMultiChoix.get(id)
@@ -178,4 +185,5 @@ class QMultiChoixController {
 			println "C2 " + it
 		}
 	}
+	
 }
